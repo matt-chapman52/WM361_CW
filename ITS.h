@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class ITS // Add child of employeexs
+class ITS // Add child of employees
 {
 public:
     ITS();

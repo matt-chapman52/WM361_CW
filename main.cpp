@@ -10,6 +10,5 @@
 int main()
 {
     ITS it;
-    it.addUser();
     return 0;
 }

@@ -8,13 +8,15 @@
 #define ITS_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
-#include "Employee.h"
+using namespace std;
 
-class ITS : public Employee
+class ITS // Add child of employeexs
 {
 public:
+    ITS();
     void addUser();
     void removeUser();
 };

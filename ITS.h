@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -19,6 +21,11 @@ public:
     ITS();
     void addUser();
     void removeUser();
+
+private:
+    string userFirstName;
+    string userSurname;
+    int userEmployeeNumber;
 };
 
 #endif

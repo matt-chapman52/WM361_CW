@@ -10,22 +10,29 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+
 using namespace std;
 
 class Employee
 {
 private:
-    string firstName;
-    string surname;
-    string email;
+    string employeeFirstName;
+    string employeeSurname;
+    string employeeEmail;
     int employeeNumber;
-    string gender;
-    int age;
+    string employeeGender;
+    int employeeAge;
 
 public:
     void getPersonalDetails();
     void changePersonalInformation();
     void requestLeave();
+    void viewLeave();
+    void changeLeave();
+    void changePassword();
 };
 
 #endif

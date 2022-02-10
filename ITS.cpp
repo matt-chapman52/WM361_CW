@@ -5,6 +5,7 @@
  */
 
 #include "ITS.h"
+
 // Constructor
 ITS::ITS()
 {
@@ -75,6 +76,8 @@ void ITS::addUser()
              << userSurname << ","
              << email << ","
              << basic_pass
+             // Add base role
+             // Add manager
              << "\n";
 
         cout << "\n----- New user added -----"
@@ -93,7 +96,7 @@ void ITS::addUser()
 void ITS::removeUser()
 {
     int rows = 0;
-    string line, word, tempSt;
+    string line, word;
     string emp_details = "Data/employee_details.csv";
     string tempFirstName;
     string tempSurname;
@@ -128,7 +131,7 @@ void ITS::removeUser()
                 tempFirstName = row[1];
                 tempSurname = row[2];
             }
-            cout << row[1] << endl;
+
             if ((userFirstName.compare(tempFirstName) == 0) && (userSurname.compare(tempSurname) == 0))
             {
                 userEmployeeNumber = stoi(row[0]);

@@ -24,8 +24,10 @@ private:
 
 public:
     void getPersonalDetails();
-    void changePersonalInformation();
+    void changePersonalDetails();
     void requestLeave();
+    void viewLeave();
+    void changeLeave();
 };
 
 #endif

@@ -11,7 +11,7 @@ void Employee::getPersonalDetails()
     // Retrieve personal details from .txt file
 }
 
-void Employee::changePersonalInformation()
+void Employee::changePersonalDetails()
 {
     // TO DO:-
     // Command line iterface to change personal details in .txt file
@@ -24,5 +24,9 @@ void Employee::requestLeave()
 }
 
 void Employee::viewLeave()
+{
+}
+
+void Employee::changeLeave()
 {
 }

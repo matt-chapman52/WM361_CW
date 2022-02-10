@@ -5,17 +5,16 @@
  */
 
 #include "ITS.h"
-
-// using namespace std;
-
 // Constructor
-ITS::ITS() // Name to be inputed
+ITS::ITS()
 {
     int option;
 
-    cout << "\n Welcome (name). What would you like to do?" << endl;
+    cout << "\n----- Welcome ----"
+         << "\nWhat would you like to do?" << endl;
     cout << "(1) Add a new user" << endl;
     cout << "(2) Delete a user" << endl;
+    cout << "(3) Exit" << endl;
     cin >> option;
     if (option == 1)
     {
@@ -25,10 +24,13 @@ ITS::ITS() // Name to be inputed
     {
         removeUser();
     }
+    else if (option == 3)
+    {
+        exit(0);
+    }
     else
     {
-        cout << "Enter a value between 1 and 2." << endl;
-        ITS();
+        cout << "Enter a value between 1 and 3." << endl;
     }
 }
 
@@ -76,6 +78,11 @@ void ITS::addUser()
              << email << ","
              << basic_pass
              << "\n";
+
+        cout << "\n----- New user added -----"
+             << "\nEmployee Number: " << employee_number
+             << "\nName: " << first_name << " " << surname
+             << "\nEmail: " << email << endl;
     }
     else
     {
@@ -87,14 +94,13 @@ void ITS::addUser()
 
 void ITS::removeUser()
 {
-    // TO DO: -
-    // Delete all details relating to the employee
     int rows = 0;
     string line, word, tempSt;
     string emp_details = "Data/employee_details.csv";
     string tempFirstName;
     string tempSurname;
     vector<string> row;
+    employee_number = 0;
 
     fstream fin;
 
@@ -137,6 +143,10 @@ void ITS::removeUser()
                 }
             }
             temp << "\n";
+        }
+        if (employee_number == 0)
+        {
+            cout << "Unable to find employee in database" << endl;
         }
     }
     fin.close();

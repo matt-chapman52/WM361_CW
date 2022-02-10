@@ -22,3 +22,7 @@ void Employee::requestLeave()
     // TO DO:-
     // Command line interface to change leave. Details stored in a .txt file
 }
+
+void Employee::viewLeave()
+{
+}

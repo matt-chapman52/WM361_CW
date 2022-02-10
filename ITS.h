@@ -25,7 +25,7 @@ public:
 private:
     string userFirstName;
     string userSurname;
-    int employee_number;
+    int userEmployeeNumber;
 };
 
 #endif

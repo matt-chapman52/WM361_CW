@@ -38,8 +38,6 @@ void ITS::addUser()
 {
 
     string basic_pass;
-    string first_name;
-    string surname;
     string email;
     int rows = 0;
     string line;
@@ -57,31 +55,31 @@ void ITS::addUser()
     }
 
     cout << "\n Enter employee first name: ";
-    cin >> first_name;
+    cin >> userFirstName;
     cout << "\n Enter employee last name: ";
-    cin >> surname;
+    cin >> userSurname;
 
     basic_pass = "password";
-    employee_number = rows + 1;
-    email = first_name + "." + surname + "@company.com";
+    userEmployeeNumber = rows + 1;
+    email = userFirstName + "." + userSurname + "@company.com";
 
     fstream fout;
     fout.open(emp_details, ios::app | ios::out); // Append and read and write access
 
-    cout << "\n New User: " << first_name << " " << surname << endl;
+    cout << "\n New User: " << userFirstName << " " << userSurname << endl;
 
     if (fout.is_open())
     {
-        fout << employee_number << ","
-             << first_name << ","
-             << surname << ","
+        fout << userEmployeeNumber << ","
+             << userFirstName << ","
+             << userSurname << ","
              << email << ","
              << basic_pass
              << "\n";
 
         cout << "\n----- New user added -----"
-             << "\nEmployee Number: " << employee_number
-             << "\nName: " << first_name << " " << surname
+             << "\nEmployee Number: " << userEmployeeNumber
+             << "\nName: " << userFirstName << " " << userSurname
              << "\nEmail: " << email << endl;
     }
     else
@@ -100,7 +98,7 @@ void ITS::removeUser()
     string tempFirstName;
     string tempSurname;
     vector<string> row;
-    employee_number = 0;
+    userEmployeeNumber = 0;
 
     fstream fin;
 
@@ -133,18 +131,18 @@ void ITS::removeUser()
             cout << row[1] << endl;
             if ((userFirstName.compare(tempFirstName) == 0) && (userSurname.compare(tempSurname) == 0))
             {
-                employee_number = stoi(row[0]);
+                userEmployeeNumber = stoi(row[0]);
             }
             for (int i = 0; i < row.size(); i++)
             {
-                if (stoi(row[0]) != employee_number)
+                if (stoi(row[0]) != userEmployeeNumber)
                 {
                     temp << row[i] << ",";
                 }
             }
             temp << "\n";
         }
-        if (employee_number == 0)
+        if (userEmployeeNumber == 0)
         {
             cout << "Unable to find employee in database" << endl;
         }

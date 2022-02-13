@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-.o
 *.obj
 
 # Precompiled Headers
@@ -32,5 +31,6 @@
 *.out
 *.app
 
-/Data
+# Directories
+Data/
 

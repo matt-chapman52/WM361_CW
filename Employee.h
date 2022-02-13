@@ -25,6 +25,7 @@ private:
     int employeeNumber;
     string gender;
     int age;
+    string password;
 
 public:
     Employee();

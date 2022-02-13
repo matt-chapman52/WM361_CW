@@ -14,6 +14,7 @@ int main()
     // ITS it;
     Employee emp;
     emp.getPersonalDetails();
+    emp.changePersonalDetails();
 
     return 0;
 }

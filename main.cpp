@@ -5,10 +5,16 @@
  */
 
 #include <iostream>
+
 #include "ITS.h"
+#include "Employee.h"
 
 int main()
 {
-    ITS it;
+    // ITS it;
+    Employee emp;
+    emp.getPersonalDetails();
+    emp.changePersonalDetails();
+
     return 0;
 }

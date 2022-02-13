@@ -9,7 +9,11 @@
 #define Employee_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <vector>
+#include <sstream>
+
 using namespace std;
 
 class Employee
@@ -21,8 +25,10 @@ private:
     int employeeNumber;
     string gender;
     int age;
+    string password;
 
 public:
+    Employee();
     void getPersonalDetails();
     void changePersonalDetails();
     void requestLeave();

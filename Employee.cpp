@@ -10,6 +10,25 @@ Employee::Employee()
     // TO DO - USe job role to call additional classes
 }
 
+int Employee::showOptions()
+{
+    int option;
+
+    cout << "\n----- Welcome -----"
+            "\nWhat would you like to do?"
+         << endl;
+    cout << "(1) Show my personal details" << endl;
+    cout << "(2) Change my personal details" << endl;
+    cout << "(3) Request Leave" << endl;
+    cout << "(4) View Leave" << endl;
+    cout << "(5) Change Leave" << endl;
+    cout << "(6) Show more options" << endl;
+    cout << "(7) Exit" << endl;
+    cin >> option;
+
+    return option;
+}
+
 void Employee::getPersonalDetails()
 {
     string line, word;

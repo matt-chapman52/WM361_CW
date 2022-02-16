@@ -1,6 +1,6 @@
 /**
  * @file ITS.cpp
- * @author your name (you@domain.com)
+ * @author 1943001
  * @brief
  */
 
@@ -17,35 +17,31 @@ ITS::ITS()
     cout << "(2) Delete a user" << endl;
     cout << "(3) Exit" << endl;
     cin >> option;
-    if (option == 1)
+
+    switch (option)
     {
+    case 1:
         addUser();
-    }
-    else if (option == 2)
-    {
+        break;
+    case 2:
         removeUser();
-    }
-    else if (option == 3)
-    {
+        break;
+    case 3:
         exit(0);
-    }
-    else
-    {
-        cout << "Enter a value between 1 and 3." << endl;
+        break;
+    default:
+        cout << "Enter a value between 1 and 3" << endl;
     }
 }
 
 void ITS::addUser()
 {
 
-    string basic_pass;
-    string email;
+    string basic_pass, line;
     int rows = 0;
-    string line;
     string emp_details = "Data/employee_details.csv";
 
     fstream fin;
-
     fin.open(emp_details, ios::in);
 
     // Get the number of rows to addign new employee numbers
@@ -62,7 +58,9 @@ void ITS::addUser()
 
     basic_pass = "password";
     userEmployeeNumber = rows + 1;
-    email = userFirstName + "." + userSurname + "@company.com";
+    userEmail = userFirstName + "." + userSurname + "@company.com";
+    userRole = "employee";
+    userManager = 0000;
 
     fstream fout;
     fout.open(emp_details, ios::app | ios::out); // Append and read and write access
@@ -74,16 +72,16 @@ void ITS::addUser()
         fout << userEmployeeNumber << ","
              << userFirstName << ","
              << userSurname << ","
-             << email << ","
-             << basic_pass
-             // Add base role
-             // Add manager
+             << userEmail << ","
+             << basic_pass << ","
+             << userRole << ","
+             << userManager << ","
              << "\n";
 
         cout << "\n----- New user added -----"
              << "\nEmployee Number: " << userEmployeeNumber
              << "\nName: " << userFirstName << " " << userSurname
-             << "\nEmail: " << email << endl;
+             << "\nEmail: " << userEmail << endl;
     }
     else
     {

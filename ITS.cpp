@@ -17,21 +17,20 @@ ITS::ITS()
     cout << "(2) Delete a user" << endl;
     cout << "(3) Exit" << endl;
     cin >> option;
-    if (option == 1)
+
+    switch (option)
     {
+    case 1:
         addUser();
-    }
-    else if (option == 2)
-    {
+        break;
+    case 2:
         removeUser();
-    }
-    else if (option == 3)
-    {
+        break;
+    case 3:
         exit(0);
-    }
-    else
-    {
-        cout << "Enter a value between 1 and 3." << endl;
+        break;
+    default:
+        cout << "Enter a value between 1 and 3" << endl;
     }
 }
 

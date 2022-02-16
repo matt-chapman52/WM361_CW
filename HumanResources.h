@@ -27,11 +27,13 @@ class HumanResources : public Employee
 public:
     HumanResources();
     void changeManager();
+    void changeJobRole();
 
 private:
     int tempEmpNum;
     int empNum;
     int newManager;
+    string newRole;
 };
 
 #endif

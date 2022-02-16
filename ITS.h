@@ -27,7 +27,10 @@ public:
 private:
     string userFirstName;
     string userSurname;
+    string userEmail;
+    string userRole;
     int userEmployeeNumber;
+    int userManager;
 };
 
 #endif

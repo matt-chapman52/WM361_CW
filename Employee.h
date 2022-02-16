@@ -29,6 +29,7 @@ private:
 
 public:
     Employee();
+    int showOptions();
     void getPersonalDetails();
     void changePersonalDetails();
     void requestLeave();

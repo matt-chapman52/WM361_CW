@@ -159,6 +159,6 @@ void HumanResources ::changeJobRole()
     }
     fin.close();
     temp.close();
-    // remove("Data/employee_details.csv");
-    // rename("Data/temp.csv", "Data/employee_details.csv");
+    remove("Data/employee_details.csv");
+    rename("Data/temp.csv", "Data/employee_details.csv");
 }

@@ -13,10 +13,7 @@ HumanResources::HumanResources()
 
 void HumanResources::changeManager()
 {
-    string line, word;
     string emp_data = "Data/employee_details.csv";
-    vector<string> row;
-    bool empFound = false;
 
     cout << "\n----- Change Manager -----" << endl;
     cout << "\nEnter the employee number you would like to change" << endl;
@@ -25,60 +22,9 @@ void HumanResources::changeManager()
     cout << "\nEnter employee's new manager's employee number" << endl;
     cin >> newManager;
 
-    // Open the original file as read only
-    fstream fin;
-    fin.open(emp_data, ios::in);
+    Employee emp;
+    emp.editData(emp_data, "Data/temp.csv", empNum, 6, newManager);
 
-    // Open a temporary file
-    fstream temp;
-    temp.open("Data/temp.csv", ios::app | ios::out);
-
-    while (!fin.eof())
-    {
-        while (getline(fin, line))
-        {
-            // Clear row vector to append data
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempEmpNum = stoi(row[0]);
-            }
-
-            if (tempEmpNum != empNum)
-            {
-                for (int i = 0; i < row.size(); i++)
-                {
-                    temp << row[i] << ",";
-                }
-                temp << "\n";
-            }
-            else
-            {
-                empFound = true;
-                for (int i = 0; i < row.size() - 1; i++)
-                {
-                    temp << row[i] << ",";
-                }
-                temp << newManager << ",";
-                temp << "\n";
-            }
-        }
-    }
-
-    if (empFound == false)
-    {
-        cout << "Unable to find employee with employee number " << empNum << endl;
-    }
-    else
-    {
-        cout << "\nNew manager has been successfully changed!\n"
-             << endl;
-    }
-    fin.close();
-    temp.close();
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }
@@ -86,10 +32,7 @@ void HumanResources::changeManager()
 void HumanResources ::changeJobRole()
 {
 
-    string line, word;
     string emp_data = "Data/employee_details.csv";
-    vector<string> row;
-    bool empFound = false;
 
     cout << "\n----- Change Job Role -----" << endl;
     cout << "\nEnter the employee number you would like to change" << endl;
@@ -98,67 +41,10 @@ void HumanResources ::changeJobRole()
     cout << "\nEnter employee's new job role (Enigneer, Manager, ITS, HR): " << endl;
     cin >> newRole;
 
-    // Open the original file as read only
-    fstream fin;
-    fin.open(emp_data, ios::in);
+    Employee emp;
 
-    // Open a temporary file
-    fstream temp;
-    temp.open("Data/temp.csv", ios::app | ios::out);
+    emp.editData(emp_data, "Data/temp.csv", empNum, 5, newRole);
 
-    while (!fin.eof())
-    {
-        while (getline(fin, line))
-        {
-            // Clear row vector to append data
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempEmpNum = stoi(row[0]);
-            }
-
-            if (tempEmpNum != empNum)
-            {
-                for (int i = 0; i < row.size(); i++)
-                {
-                    temp << row[i] << ",";
-                }
-                temp << "\n";
-            }
-            else
-            {
-                empFound = true;
-                for (int i = 0; i < row.size(); i++)
-                {
-                    if (i == 5)
-                    {
-                        temp << newRole << ",";
-                        cout << "hit";
-                    }
-                    else
-                    {
-                        temp << row[i] << ",";
-                    }
-                }
-                temp << "\n";
-            }
-        }
-    }
-
-    if (empFound == false)
-    {
-        cout << "Unable to find employee with employee number " << empNum << endl;
-    }
-    else
-    {
-        cout << "\nRole has been successfully changed!\n"
-             << endl;
-    }
-    fin.close();
-    temp.close();
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }

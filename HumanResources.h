@@ -32,7 +32,7 @@ public:
 private:
     int tempEmpNum;
     int empNum;
-    int newManager;
+    string newManager;
     string newRole;
 };
 

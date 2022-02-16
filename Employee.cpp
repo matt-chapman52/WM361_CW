@@ -31,119 +31,61 @@ int Employee::showOptions()
 
 void Employee::getPersonalDetails()
 {
-    string line, word;
     string emp_details = "Data/employee_details.csv";
     vector<string> row;
     int tempEmpNum;
-    employeeNumber = 0;
 
     cout << "Enter employee number: " << endl;
     cin >> employeeNumber;
 
-    // Open file as read-only
-    fstream fin;
-    fin.open(emp_details, ios::in);
+    // Method for reading data from csv file
+    row = readData(emp_details, employeeNumber);
 
-    if (fin.is_open())
-    {
-        while (getline(fin, line))
-        {
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempEmpNum = stoi(row[0]);
-            }
-
-            if (employeeNumber == tempEmpNum)
-            {
-                employeeNumber = stoi(row[0]);
-                firstName = row[1];
-                surname = row[2];
-                email = row[3];
-
-                cout << "\n----- Personal Details ------\n"
-                     << endl;
-                cout << "Employee Number: " << employeeNumber << endl;
-                cout << "First Name: " << firstName << endl;
-                cout << "Surname: " << surname << endl;
-                cout << "Gender: " << gender << endl;
-                cout << "Age: " << age << endl;
-            }
-        }
-        if (employeeNumber == 0)
-        {
-            cout << "Unable to find employee in database" << endl;
-        }
-    }
-    fin.close();
+    cout << "\n----- Personal Details ------\n"
+         << endl;
+    cout << "Employee Number: " << row[0] << endl;
+    cout << "First Name: " << row[1] << endl;
+    cout << "Surname: " << row[2] << endl;
+    cout << "Email: " << row[3] << endl;
 }
 
 void Employee::changePersonalDetails()
 {
-    string line, word;
+    // string line, word;
     string emp_details = "Data/employee_details.csv";
     vector<string> row;
-    int tempEmpNumber;
-    string newFirstName, newSurname, newGender, newAge;
+    int decision;
+    string newData;
+    // int tempEmpNumber;
+    // string newFirstName, newSurname, newGender, newAge;
+    cout << "\n-----Change Personal Details-----" << endl;
 
     cout << "Enter employee number: " << endl;
     cin >> employeeNumber;
 
-    // Open file as read-only
-    fstream fin;
-    fin.open(emp_details, ios::in);
+    readData(emp_details, employeeNumber);
 
-    // Open a temporary file for read and write
-    fstream temp;
-    temp.open("Data/temp.csv", ios::app | ios::out);
+    cout << "\n What would you like to change?"
+         << "\n(1) First Name"
+         << "\n(2) Surname" << endl;
+    cin >> decision;
 
-    cout << "\n----- Change Personal Details -----\n"
-         << endl;
-    cout << "Enter new First Name: " << endl;
-    cin >> newFirstName;
-    cout << "Enter new Surname: " << endl;
-    cin >> newSurname;
-    cout << "Enter new Gender: " << endl;
-    cin >> newGender;
-    cout << "Enter new Age: " << endl;
-    cin >> newAge;
-
-    if (fin.is_open())
+    switch (decision)
     {
-        while (getline(fin, line))
-        {
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempEmpNumber = stoi(row[0]);
-                password = row[4];
-            }
-
-            if (tempEmpNumber != employeeNumber)
-            {
-                for (int i = 0; i < row.size(); i++)
-                {
-                    temp << row[i] << ',';
-                }
-                temp << '\n';
-            }
-            else
-            {
-                temp << employeeNumber << ","
-                     << newFirstName << ","
-                     << newSurname << ","
-                     << email << ","
-                     << password << ","
-                     << "\n";
-            }
-        }
+    case 1:
+        cout << "Enter new first name: " << endl;
+        cin >> newData;
+        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData);
+        break;
+    case 2:
+        cout << "Enter new surname name: " << endl;
+        cin >> newData;
+        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
+        break;
     }
+
+    remove("Data/employee_details.csv");
+    rename("Data/temp.csv", "Data/employee_details.csv");
 }
 
 void Employee::requestLeave()
@@ -188,7 +130,7 @@ void Employee::viewLeave()
     // Ask user what to do next
 
     cout << "\n----- Change and Request Leave -----"
-         << "\nWhat woudl you like to do?"
+         << "\nWhat would you like to do?"
          << endl;
     cout << "(1) Request Leave" << endl;
     cout << "(2) Change Leave" << endl;
@@ -204,10 +146,6 @@ void Employee::viewLeave()
         cout << "Enter end date" << endl;
         cin >> endDate;
 
-        // Open employee details
-        // Get managers employee number
-        // Write to employee_leave with emp_num, manager_num, start_data, endDate, approved?
-
     case 2:
 
     case 3:
@@ -222,4 +160,107 @@ void Employee::viewLeave()
 
 void Employee::changeLeave()
 {
+}
+
+vector<string> Employee::readData(string fileName, int empNum)
+{
+    string line, word;
+    vector<string> row, output;
+    int tempEmpNum;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+                tempEmpNum = stoi(row[0]);
+            }
+
+            if (empNum == tempEmpNum)
+            {
+                output = row;
+            }
+            else
+            {
+                output.push_back("Error in retrieving data");
+                cout << "Unable to retrieve data" << endl;
+            }
+        }
+    }
+
+    file.close();
+    return output;
+}
+
+vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData)
+{
+    string line, word;
+    vector<string> row, output;
+    int tempEmpNum;
+    bool empFound = false;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    fstream temp;
+    temp.open(tempName, ios::app | ios::out);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+                tempEmpNum = stoi(row[0]);
+            }
+
+            if (tempEmpNum != empNum)
+            {
+                for (int i = 0; i < row.size(); i++)
+                {
+                    temp << row[i] << ",";
+                }
+                temp << "\n";
+            }
+            else
+            {
+                empFound = true;
+                output = row;
+                for (int i = 0; i < row.size(); i++)
+                {
+                    if (i == field)
+                    {
+                        temp << newData << ",";
+                    }
+                    else
+                    {
+                        temp << row[i] << ",";
+                    }
+                }
+                temp << "\n";
+            }
+        }
+    }
+    if (empFound == false)
+    {
+        output.push_back("Error in retrieving data");
+        cout << "Unable to retrieve data" << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    return output;
 }

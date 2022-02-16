@@ -35,6 +35,8 @@ public:
     void requestLeave();
     void viewLeave();
     void changeLeave();
+    vector<string> readData(string fileName, int empNum);
+    vector<string> editData(string fileName, string tempName, int empNum, int field, string newData);
 };
 
 #endif

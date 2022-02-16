@@ -154,6 +154,70 @@ void Employee::requestLeave()
 
 void Employee::viewLeave()
 {
+    string line, word, startDate, endDate;
+    string leave_details = "Data/employee_leave.csv";
+    vector<string> row;
+    int tempEmpNum;
+    int option;
+
+    cout << "Enter employee number: " << endl;
+    cin >> employeeNumber;
+
+    // Open file as read only
+    fstream fin;
+    fin.open(leave_details, ios::in);
+
+    while (!fin.eof())
+    {
+        while (getline(fin, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+                tempEmpNum = stoi(row[0]);
+            }
+            // push all start and end dates into a vector then print once file is finished
+        }
+    }
+
+    // Print leave
+
+    // Ask user what to do next
+
+    cout << "\n----- Change and Request Leave -----"
+         << "\nWhat woudl you like to do?"
+         << endl;
+    cout << "(1) Request Leave" << endl;
+    cout << "(2) Change Leave" << endl;
+    cout << "(3) Exit" << endl;
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        cout << "\n----- Request Leave ------" << endl;
+        cout << "\nEnter start date" << endl;
+        cin >> startDate;
+        cout << "Enter end date" << endl;
+        cin >> endDate;
+
+        // Open employee details
+        // Get managers employee number
+        // Write to employee_leave with emp_num, manager_num, start_data, endDate, approved?
+
+    case 2:
+
+    case 3:
+
+    default:
+        cout << "Enter a value between 1 and 3";
+        break;
+    }
+
+    // Return to home page
 }
 
 void Employee::changeLeave()

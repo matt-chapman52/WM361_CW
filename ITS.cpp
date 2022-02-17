@@ -78,63 +78,14 @@ void ITS::addUser()
 
 void ITS::removeUser()
 {
-    int rows = 0;
-    string line, word;
     string emp_details = "Data/employee_details.csv";
-    string tempFirstName;
-    string tempSurname;
-    vector<string> row;
-    userEmployeeNumber = 0;
-
-    fstream fin;
-
-    fin.open(emp_details, ios::in);
-
-    fstream temp;
-
-    temp.open("Data/temp.csv", ios::app | ios::out);
-
     cout << "----- Remove a user from the system -----" << endl;
-    cout << "Enter employee first name: " << endl;
-    cin >> userFirstName;
-    cout << "Enter employee surname: " << endl;
-    cin >> userSurname;
+    cout << "Enter employee number: " << endl;
+    cin >> userEmployeeNumber;
 
-    if (fin.is_open())
-    {
+    Employee emp;
+    emp.deleteData(emp_details, "Data/temp.csv", userEmployeeNumber);
 
-        while (getline(fin, line))
-        {
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempFirstName = row[1];
-                tempSurname = row[2];
-            }
-
-            if ((userFirstName.compare(tempFirstName) == 0) && (userSurname.compare(tempSurname) == 0))
-            {
-                userEmployeeNumber = stoi(row[0]);
-            }
-            for (int i = 0; i < row.size(); i++)
-            {
-                if (stoi(row[0]) != userEmployeeNumber)
-                {
-                    temp << row[i] << ",";
-                }
-            }
-            temp << "\n";
-        }
-        if (userEmployeeNumber == 0)
-        {
-            cout << "Unable to find employee in database" << endl;
-        }
-    }
-    fin.close();
-    temp.close();
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }

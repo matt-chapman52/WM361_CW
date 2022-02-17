@@ -100,13 +100,14 @@ void Employee::viewLeave()
     vector<string> row;
     string leave_details = "Data/employee_leave.csv";
     string emp_details = "Data/employee_details.csv";
+    int option;
 
     cout << "Enter employee number: " << endl;
     cin >> employeeNumber;
 
-    cout << "Your current booked leave: "
+    cout << "Your current booked leave: ";
 
-        row = readData(leave_details, employeeNumber);
+    row = readData(leave_details, employeeNumber);
 
     cout << row[3] << endl;
     // Print leave
@@ -126,21 +127,14 @@ void Employee::viewLeave()
     case 1:
         cout << "\n----- Request Leave ------" << endl;
         cout << "\nEnter start date" << endl;
-        cin >> startDate;
-        cout << "Enter end date" << endl;
-        cin >> endDate;
 
-        row.clear()
-            row = readData()
+    case 2:
 
-                      writeData(leave_details, )
+    case 3:
 
-                          case 2 :
-
-            case 3 :
-
-            default : cout
-                      << "Enter a value between 1 and 3";
+    default:
+        cout
+            << "Enter a value between 1 and 3";
         break;
     }
 

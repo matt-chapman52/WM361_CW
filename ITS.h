@@ -13,9 +13,11 @@
 #include <vector>
 #include <sstream>
 
+#include "Employee.h"
+
 using namespace std;
 
-class ITS // Add child of employees
+class ITS : public Employee
 {
 public:
     ITS();
@@ -25,7 +27,10 @@ public:
 private:
     string userFirstName;
     string userSurname;
+    string userEmail;
+    string userRole;
     int userEmployeeNumber;
+    int userManager;
 };
 
 #endif

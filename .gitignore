@@ -33,6 +33,6 @@
 
 main
 
-# Directories
-Data/
+# Data Files
+*.csv
 

@@ -278,6 +278,7 @@ void Employee::writeData(string fileName, vector<string> data)
             file << data[i] << ",";
         }
         file << "\n";
+        cout << "Data successfully appended!" << endl;
     }
     else
     {

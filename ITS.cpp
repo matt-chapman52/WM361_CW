@@ -40,11 +40,12 @@ void ITS::addUser()
     string basic_pass, line;
     int rows = 0;
     string emp_details = "Data/employee_details.csv";
+    vector<string> row;
 
     fstream fin;
     fin.open(emp_details, ios::in);
 
-    // Get the number of rows to addign new employee numbers
+    // Get the number of rows to assign new employee numbers
     if (fin.is_open())
     {
         while (getline(fin, line))
@@ -60,96 +61,31 @@ void ITS::addUser()
     userEmployeeNumber = rows + 1;
     userEmail = userFirstName + "." + userSurname + "@company.com";
     userRole = "employee";
-    userManager = 0000;
+    userManager = 0;
 
-    fstream fout;
-    fout.open(emp_details, ios::app | ios::out); // Append and read and write access
+    // Assign data to row vector
+    row.push_back(to_string(userEmployeeNumber));
+    row.push_back(userFirstName);
+    row.push_back(userSurname);
+    row.push_back(userEmail);
+    row.push_back(basic_pass);
+    row.push_back(userRole);
+    row.push_back(to_string(userManager));
 
-    cout << "\n New User: " << userFirstName << " " << userSurname << endl;
-
-    if (fout.is_open())
-    {
-        fout << userEmployeeNumber << ","
-             << userFirstName << ","
-             << userSurname << ","
-             << userEmail << ","
-             << basic_pass << ","
-             << userRole << ","
-             << userManager << ","
-             << "\n";
-
-        cout << "\n----- New user added -----"
-             << "\nEmployee Number: " << userEmployeeNumber
-             << "\nName: " << userFirstName << " " << userSurname
-             << "\nEmail: " << userEmail << endl;
-    }
-    else
-    {
-        cout << "Unable to open file" << endl;
-    }
-
-    // To Do: What Now????
+    Employee emp;
+    emp.writeData(emp_details, row);
 }
 
 void ITS::removeUser()
 {
-    int rows = 0;
-    string line, word;
     string emp_details = "Data/employee_details.csv";
-    string tempFirstName;
-    string tempSurname;
-    vector<string> row;
-    userEmployeeNumber = 0;
-
-    fstream fin;
-
-    fin.open(emp_details, ios::in);
-
-    fstream temp;
-
-    temp.open("Data/temp.csv", ios::app | ios::out);
-
     cout << "----- Remove a user from the system -----" << endl;
-    cout << "Enter employee first name: " << endl;
-    cin >> userFirstName;
-    cout << "Enter employee surname: " << endl;
-    cin >> userSurname;
+    cout << "Enter employee number: " << endl;
+    cin >> userEmployeeNumber;
 
-    if (fin.is_open())
-    {
+    Employee emp;
+    emp.deleteData(emp_details, "Data/temp.csv", userEmployeeNumber);
 
-        while (getline(fin, line))
-        {
-            row.clear();
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempFirstName = row[1];
-                tempSurname = row[2];
-            }
-
-            if ((userFirstName.compare(tempFirstName) == 0) && (userSurname.compare(tempSurname) == 0))
-            {
-                userEmployeeNumber = stoi(row[0]);
-            }
-            for (int i = 0; i < row.size(); i++)
-            {
-                if (stoi(row[0]) != userEmployeeNumber)
-                {
-                    temp << row[i] << ",";
-                }
-            }
-            temp << "\n";
-        }
-        if (userEmployeeNumber == 0)
-        {
-            cout << "Unable to find employee in database" << endl;
-        }
-    }
-    fin.close();
-    temp.close();
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }

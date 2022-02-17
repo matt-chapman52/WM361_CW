@@ -268,7 +268,6 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
 void Employee::writeData(string fileName, vector<string> data)
 {
     fstream file;
-    cout << fileName << endl;
     file.open(fileName, ios::app | ios::out);
 
     if (file.is_open())
@@ -284,4 +283,43 @@ void Employee::writeData(string fileName, vector<string> data)
     {
         cout << "Unable to open file" << endl;
     }
+}
+
+void Employee::deleteData(string fileName, string tempFile, int empNum)
+{
+    string line, word;
+    vector<string> row, output;
+    int tempEmpNum;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    fstream temp;
+    temp.open(tempFile, ios::app | ios::out);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+                tempEmpNum = stoi(row[0]);
+            }
+
+            for (int i = 0; i < row.size(); i++)
+            {
+                if (tempEmpNum != empNum)
+                {
+                    temp << row[i] << ",";
+                }
+            }
+            temp << "\n";
+        }
+    }
+    file.close();
+    temp.close();
 }

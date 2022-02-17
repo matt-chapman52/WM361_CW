@@ -26,6 +26,7 @@ private:
     string gender;
     int age;
     string password;
+    int managerEmpNum;
 
 public:
     Employee();

@@ -101,16 +101,10 @@ void Employee::viewLeave()
     string leave_details = "Data/employee_leave.csv";
     string emp_details = "Data/employee_details.csv";
     int option;
+    string startDate, endDate;
 
     cout << "Enter employee number: " << endl;
-    cin >> employeeNumber;
-
-    cout << "Your current booked leave: ";
-
-    row = readData(leave_details, employeeNumber);
-
-    cout << row[3] << endl;
-    // Print leave
+    cin >> employeeNumber; // Automatically done once login code complete
 
     // Ask user what to do next
 
@@ -119,22 +113,42 @@ void Employee::viewLeave()
          << endl;
     cout << "(1) Request Leave" << endl;
     cout << "(2) Change Leave" << endl;
-    cout << "(3) Exit" << endl;
+    cout << "(3) View Leave" cout << "(4) Exit" << endl;
     cin >> option;
 
     switch (option)
     {
     case 1:
         cout << "\n----- Request Leave ------" << endl;
-        cout << "\nEnter start date" << endl;
+        cout << "\nEnter start date in form DDMMYYYY: " << endl;
+        cin >> startDate;
+        cout << "Enter end date in for DDMMYYYY: " << endl;
+        cin >> endDate;
+
+        row.clear();
+        row = readData(emp_details, employeeNumber);
+        managerEmpNum = stoi(row[6]);
+
+        row.clear();
+        row.push_back(to_string(employeeNumber));
+        row.push_back(to_string(managerEmpNum));
+        row.push_back(startDate);
+        row.push_back(endDate);
+
+        writeData(leave_details, row);
+        // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?
+        // Or just have different rows but make sure we read and display them all.
 
     case 2:
-
+        // TO DO: - Henry
     case 3:
+        // TO DO: - Henry
+    case 4:
+        exit(0);
 
     default:
         cout
-            << "Enter a value between 1 and 3";
+            << "Enter a value between 1 and 4";
         break;
     }
 
@@ -150,6 +164,7 @@ vector<string> Employee::readData(string fileName, int empNum)
     string line, word;
     vector<string> row, output;
     int tempEmpNum;
+    bool empFound = false;
 
     fstream file;
     file.open(fileName, ios::in);
@@ -170,15 +185,15 @@ vector<string> Employee::readData(string fileName, int empNum)
             if (empNum == tempEmpNum)
             {
                 output = row;
+                empFound = true;
             }
-            else
+            if (empFound == false)
             {
                 output.push_back("Error in retrieving data");
                 cout << "Unable to retrieve data" << endl;
             }
         }
     }
-
     file.close();
     return output;
 }

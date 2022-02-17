@@ -264,3 +264,23 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
 
     return output;
 }
+
+void Employee::writeData(string fileName, vector<string> data)
+{
+    fstream file;
+    cout << fileName << endl;
+    file.open(fileName, ios::app | ios::out);
+
+    if (file.is_open())
+    {
+        for (int i = 0; i < data.size(); i++)
+        {
+            file << data[i] << ",";
+        }
+        file << "\n";
+    }
+    else
+    {
+        cout << "Unable to open file" << endl;
+    }
+}

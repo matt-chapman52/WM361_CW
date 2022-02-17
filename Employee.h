@@ -37,6 +37,7 @@ public:
     void changeLeave();
     vector<string> readData(string fileName, int empNum);
     vector<string> editData(string fileName, string tempName, int empNum, int field, string newData);
+    void writeData(string fileName, vector<string> data);
 };
 
 #endif

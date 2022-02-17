@@ -41,6 +41,7 @@ void Employee::getPersonalDetails()
     // Method for reading data from csv file
     row = readData(emp_details, employeeNumber);
 
+    // Display the Data in the console
     cout << "\n----- Personal Details ------\n"
          << endl;
     cout << "Employee Number: " << row[0] << endl;
@@ -96,35 +97,18 @@ void Employee::requestLeave()
 
 void Employee::viewLeave()
 {
-    string line, word, startDate, endDate;
-    string leave_details = "Data/employee_leave.csv";
     vector<string> row;
-    int tempEmpNum;
-    int option;
+    string leave_details = "Data/employee_leave.csv";
+    string emp_details = "Data/employee_details.csv";
 
     cout << "Enter employee number: " << endl;
     cin >> employeeNumber;
 
-    // Open file as read only
-    fstream fin;
-    fin.open(leave_details, ios::in);
+    cout << "Your current booked leave: "
 
-    while (!fin.eof())
-    {
-        while (getline(fin, line))
-        {
-            row.clear();
-            stringstream s(line);
+        row = readData(leave_details, employeeNumber);
 
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-                tempEmpNum = stoi(row[0]);
-            }
-            // push all start and end dates into a vector then print once file is finished
-        }
-    }
-
+    cout << row[3] << endl;
     // Print leave
 
     // Ask user what to do next
@@ -146,12 +130,17 @@ void Employee::viewLeave()
         cout << "Enter end date" << endl;
         cin >> endDate;
 
-    case 2:
+        row.clear()
+            row = readData()
 
-    case 3:
+                      writeData(leave_details, )
 
-    default:
-        cout << "Enter a value between 1 and 3";
+                          case 2 :
+
+            case 3 :
+
+            default : cout
+                      << "Enter a value between 1 and 3";
         break;
     }
 
@@ -207,12 +196,15 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
     int tempEmpNum;
     bool empFound = false;
 
+    // Open the current file as read-only
     fstream file;
     file.open(fileName, ios::in);
 
+    // Open a temporary file to write the data to
     fstream temp;
     temp.open(tempName, ios::app | ios::out);
 
+    // Perfom until end of file is reached
     while (!file.eof())
     {
         while (getline(file, line))
@@ -222,12 +214,14 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
 
             while (getline(s, word, ','))
             {
+                // Append to an empty vector
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
 
             if (tempEmpNum != empNum)
             {
+                // Re-write the data
                 for (int i = 0; i < row.size(); i++)
                 {
                     temp << row[i] << ",";
@@ -242,6 +236,7 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
                 {
                     if (i == field)
                     {
+                        // Replace the current data with new data
                         temp << newData << ",";
                     }
                     else
@@ -288,12 +283,14 @@ void Employee::writeData(string fileName, vector<string> data)
 void Employee::deleteData(string fileName, string tempFile, int empNum)
 {
     string line, word;
-    vector<string> row, output;
+    vector<string> row;
     int tempEmpNum;
 
+    // Open the file with data as read-only
     fstream file;
     file.open(fileName, ios::in);
 
+    // Open a temporary file where data can be appended
     fstream temp;
     temp.open(tempFile, ios::app | ios::out);
 
@@ -301,15 +298,18 @@ void Employee::deleteData(string fileName, string tempFile, int empNum)
     {
         while (getline(file, line))
         {
+            // Split each line up
             row.clear();
             stringstream s(line);
 
             while (getline(s, word, ','))
             {
+                // Add each word to a vector cell
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
 
+            // Only write the data which is not to be deleted
             for (int i = 0; i < row.size(); i++)
             {
                 if (tempEmpNum != empNum)

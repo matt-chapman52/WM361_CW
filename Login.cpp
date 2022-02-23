@@ -16,7 +16,7 @@ Login::Login()
     VerifyEmployee();
 }
 
-Login::VerifyEmployee()
+void Login::VerifyEmployee()
 {
     int rows = 0;
     int choice;
@@ -49,10 +49,10 @@ Login::VerifyEmployee()
 
 }
 
-Login::VerifyPassword()
+int Login::VerifyPassword()
 {
     cout << "/nEnter your Password" << endl;
-    cin << loginPassword;
+    cin >> loginPassword;
     cout << "/nLogin successful!" << endl;
     // return employee number if successful
     // return 0 if unsuccessful

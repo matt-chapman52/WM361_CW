@@ -13,7 +13,7 @@ Login::Login()
          << "\nLogin to Continue"
          << "\nPlease enter your employee number" << endl;
     cin >> loginEmployeeNum;
-    VerifyEmployee();
+    //VerifyEmployee();
 }
 
 void Login::VerifyEmployee()

@@ -21,7 +21,7 @@ void Login::VerifyEmployee()
     int rows = 0;
     int choice;
     string line;
-    ifstream file("Data/employee_details.csv")
+    ifstream file("Data/employee_details.csv");
 
     while (getline(file, line))
     {
@@ -38,7 +38,7 @@ void Login::VerifyEmployee()
         // "This employee number does not exist, enter 1 to try again or 2 to register for the annual leave service with IT"
         if (choice==1)
         {
-            Login()
+            Login();
         }
         else
         {
@@ -56,6 +56,6 @@ int Login::VerifyPassword()
     cout << "/nLogin successful!" << endl;
     // return employee number if successful
     // return 0 if unsuccessful
-    return 0
+    return 0;
 }
 

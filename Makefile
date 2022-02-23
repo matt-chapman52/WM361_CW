@@ -18,8 +18,8 @@ CFLAGS = -Wall -g
 
 # Targets needed to bring the executable up to date
 
-main: main.o ITS.o Employee.o HumanResources.o 
-	$(CC) $(CFLAGS) -o main main.o ITS.o Employee.o HumanResources.o 
+main: main.o ITS.o Employee.o HumanResources.o Login.o
+	$(CC) $(CFLAGS) -o main main.o ITS.o Employee.o HumanResources.o Login.o
 	
 # The main.o target
 main.o: main.cpp ITS.h Employee.h HumanResources.h
@@ -29,3 +29,5 @@ ITS.o: ITS.h
 HumanResources.o: HumanResources.h
 
 Employee.o: Employee.h ITS.h HumanResources.h
+
+Login.o: Login.cpp Login.h 

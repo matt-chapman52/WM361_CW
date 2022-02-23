@@ -14,7 +14,7 @@ int main()
 {
     int option;
     // ITS it;
-    //Login loginUser;
+    // Login loginUser; //Uncomment to create a login user object (Login class)
     Employee emp;
 
     while (true)

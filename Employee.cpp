@@ -113,7 +113,8 @@ void Employee::viewLeave()
          << endl;
     cout << "(1) Request Leave" << endl;
     cout << "(2) Change Leave" << endl;
-    cout << "(3) View Leave" cout << "(4) Exit" << endl;
+    cout << "(3) View Leave" << endl;
+    cout << "(4) Exit" << endl;
     cin >> option;
 
     switch (option)
@@ -134,6 +135,7 @@ void Employee::viewLeave()
         row.push_back(to_string(managerEmpNum));
         row.push_back(startDate);
         row.push_back(endDate);
+        row.push_back("In Review");
 
         writeData(leave_details, row);
         // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?

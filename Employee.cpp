@@ -135,6 +135,7 @@ void Employee::viewLeave()
         row.push_back(to_string(managerEmpNum));
         row.push_back(startDate);
         row.push_back(endDate);
+        row.push_back("In Review");
 
         writeData(leave_details, row);
         // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?

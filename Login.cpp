@@ -56,5 +56,6 @@ int Login::VerifyPassword()
     cout << "/nLogin successful!" << endl;
     // return employee number if successful
     // return 0 if unsuccessful
+    return 0
 }
 

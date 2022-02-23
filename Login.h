@@ -21,7 +21,7 @@ public:
     Login();
 
 private:
-    bool VerifyEmployee();
+    void VerifyEmployee();
     int VerifyPassword();
     int loginEmployeeNum;
     int databaseEmployeeNum;

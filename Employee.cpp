@@ -113,7 +113,8 @@ void Employee::viewLeave()
          << endl;
     cout << "(1) Request Leave" << endl;
     cout << "(2) Change Leave" << endl;
-    cout << "(3) View Leave" cout << "(4) Exit" << endl;
+    cout << "(3) View Leave" << endl;
+    cout << "(4) Exit" << endl;
     cin >> option;
 
     switch (option)

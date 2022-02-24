@@ -24,3 +24,7 @@ To edit this project and run locally:
 * On mac type: make
 * Once compiled type: ./main 
 * The main file should be running in your terminal
+
+
+## Org Chart
+![img.png](misc/org_chart.png)

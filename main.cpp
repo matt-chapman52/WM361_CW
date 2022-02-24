@@ -14,7 +14,11 @@ int main()
 {
     int option;
     // ITS it;
-    // Login loginUser; //Uncomment to create a login user object (Login class)
+
+    //Uncomment to create a login user object and return employee num of login user 
+    //Login loginUser;
+    //int empNum = loginUser.VerifyEmployee();
+
     Employee emp;
 
     while (true)

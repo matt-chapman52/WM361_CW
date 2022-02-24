@@ -17,16 +17,15 @@ using namespace std;
 
 class Login // Add child of employees
 {
-public:
-    Login();
-
 private:
-    void VerifyEmployee();
-    int VerifyPassword();
+    bool VerifyPassword();
     int loginEmployeeNum;
     int databaseEmployeeNum;
     string loginPassword;
     string databasePassword;
+
+public:
+    int VerifyEmployee();
 };
 
 #endif

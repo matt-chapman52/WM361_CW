@@ -91,35 +91,14 @@ void Employee::changePersonalDetails()
 
 void Employee::requestLeave()
 {
-    // TO DO:-
-    // Command line interface to change leave. Details stored in a .txt file
-}
+    int oneMore = 1;
+    while (oneMore == 1) {
 
-void Employee::viewLeave()
-{
-    vector<string> row;
-    string leave_details = "Data/employee_leave.csv";
-    string emp_details = "Data/employee_details.csv";
-    int option;
-    string startDate, endDate;
+        vector <string> row;
+        string leave_details = "Data/employee_leave.csv";
+        string emp_details = "Data/employee_details.csv";
+        string startDate, endDate;
 
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber; // Automatically done once login code complete
-
-    // Ask user what to do next
-
-    cout << "\n----- Change and Request Leave -----"
-         << "\nWhat would you like to do?"
-         << endl;
-    cout << "(1) Request Leave" << endl;
-    cout << "(2) Change Leave" << endl;
-    cout << "(3) View Leave" << endl;
-    cout << "(4) Exit" << endl;
-    cin >> option;
-
-    switch (option)
-    {
-    case 1:
         cout << "\n----- Request Leave ------" << endl;
         cout << "\nEnter start date in form DDMMYYYY: " << endl;
         cin >> startDate;
@@ -138,21 +117,64 @@ void Employee::viewLeave()
         row.push_back("In Review");
 
         writeData(leave_details, row);
-        // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?
-        // Or just have different rows but make sure we read and display them all.
 
-    case 2:
-        // TO DO: - Henry
-    case 3:
-        // TO DO: - Henry
-    case 4:
-        exit(0);
+        int inputCheck = 1;
 
-    default:
-        cout
-            << "Enter a value between 1 and 4";
-        break;
+        while (inputCheck == 1) {
+            int another;
+
+            cout << "\nWould you look to book another absence?" << endl;
+            cout << "(1) Yes" << endl;
+            cout << "(2) No" << endl;
+
+            cin >> another;
+
+            if (another == 1) {
+                inputCheck = 0;
+            }
+            else if  (another == 2) {
+                oneMore = 0;
+                cout << oneMore << endl;
+                break;
+            }
+        }
     }
+}
+
+void Employee::viewLeave()
+{
+
+    int option;
+
+    cout << "Enter employee number: " << endl;
+    cin >> employeeNumber; // Automatically done once login code complete
+
+    // Ask user what to do next
+
+    cout << "\n----- Change and Request Leave -----"
+         << "\nWhat would you like to do?"
+         << endl;
+    cout << "(1) Request Leave" << endl;
+    cout << "(2) Change Leave" << endl;
+    cout << "(3) View Leave" << endl;
+    cout << "(4) Exit" << endl;
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        requestLeave();
+        break;
+
+        case 2:
+            //do the other ones - HENRY
+            break;
+
+
+
+
+    }
+
 
     // Return to home page
 }
@@ -184,10 +206,12 @@ vector<string> Employee::readData(string fileName, int empNum)
                 tempEmpNum = stoi(row[0]);
             }
 
+            //this is pointless <3
             if (empNum == tempEmpNum)
             {
                 output = row;
                 empFound = true;
+                cout << tempEmpNum << endl;
             }
             if (empFound == false)
             {

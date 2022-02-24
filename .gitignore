@@ -36,3 +36,7 @@ main
 # Data Files
 *.csv
 
+# but keep the details and leave (for testing)
+!employee_details.csv
+!employee_leave.csv
+

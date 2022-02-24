@@ -41,5 +41,5 @@ main
 !employee_leave.csv
 
 # Other Stuff
-.vscode/
-.idea/
+/.vscode/
+/.idea/

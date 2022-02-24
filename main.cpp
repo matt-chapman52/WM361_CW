@@ -8,11 +8,13 @@
 
 #include "ITS.h"
 #include "Employee.h"
+#include "Login.h"
 
 int main()
 {
     int option;
     // ITS it;
+    // Login loginUser; //Uncomment to create a login user object (Login class)
     Employee emp;
 
     while (true)

@@ -44,11 +44,8 @@ int main()
             emp.viewLeave();
             break;
         case 4:
-            if (!strcasecmp(role.c_str(), "Employee"))
-            {
-                cout << "No more options to show" << endl;
-            }
-            else if (!strcasecmp(role.c_str(), "IT"))
+
+            if (!strcasecmp(role.c_str(), "IT"))
             {
                 ITS it;
             }
@@ -60,6 +57,53 @@ int main()
             {
                 // Manager manager;
                 // manager.showoptions();
+                break;
+            }
+            else if (!strcasecmp(role.c_str(), "IT Manager"))
+            {
+                int option;
+                cout << "\n----- More Options ----" << endl;
+                cout << "(1) IT Menu";
+                cout << "\n(2) Manager Menu";
+                cin >> option;
+
+                if (option == 1)
+                {
+                    ITS it;
+                }
+                else if (option == 2)
+                {
+                    // Manager manager;
+                }
+                else
+                {
+                    cout << "Enter a valid number" << endl;
+                }
+            }
+            else if (!strcasecmp(role.c_str(), "HR Manager"))
+            {
+                int option;
+                cout << "\n----- More Options ----" << endl;
+                cout << "(1) HR Menu";
+                cout << "\n(2) Manager Menu";
+                cin >> option;
+
+                if (option == 1)
+                {
+                    HumanResources HR;
+                }
+                else if (option == 2)
+                {
+                    // Manager manager;
+                }
+                else
+                {
+                    cout << "Enter a valid number" << endl;
+                }
+            }
+            else
+            {
+                cout << "No more options to show" << endl;
             }
 
         case 5:

@@ -8,18 +8,26 @@
 
 #include "ITS.h"
 #include "Employee.h"
+#include "HumanResources.h"
 #include "Login.h"
 
 int main()
 {
     int option;
-    // ITS it;
+    vector<string> details;
+    string role;
 
-    //Uncomment to create a login user object and return employee num of login user 
-    //Login loginUser;
-    //int empNum = loginUser.VerifyEmployee();
+    Login loginUser;
+    Employee employee;
+
+    int empNum = loginUser.VerifyEmployee();
 
     Employee emp;
+
+    details = emp.readData("Data/employee_details.csv", empNum);
+    role = details[5];
+
+    cout << role << endl;
 
     while (true)
     {
@@ -33,20 +41,30 @@ int main()
             emp.changePersonalDetails();
             break;
         case 3:
-            emp.requestLeave();
-            break;
-        case 4:
             emp.viewLeave();
             break;
+        case 4:
+            if (!strcasecmp(role.c_str(), "Employee"))
+            {
+                cout << "No more options to show" << endl;
+            }
+            else if (!strcasecmp(role.c_str(), "IT"))
+            {
+                ITS it;
+            }
+            else if (!strcasecmp(role.c_str(), "HR"))
+            {
+                HumanResources HR;
+            }
+            else if (!strcasecmp(role.c_str(), "Manager"))
+            {
+                // Manager manager;
+                // manager.showoptions();
+            }
+
         case 5:
-            emp.changeLeave();
-            break;
-            // Case 6 to do, get the job role and show options
-        // case 6:
-        // if statement;
-        // break;
-        case 7:
             exit(0);
+            break;
         }
     }
 

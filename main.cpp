@@ -19,8 +19,6 @@ int main()
 
     Login loginUser;
     Employee employee;
-    HumanResources HR;
-    // Manager manager;
 
     int empNum = loginUser.VerifyEmployee();
 

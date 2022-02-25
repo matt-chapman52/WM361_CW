@@ -21,7 +21,6 @@ class ITS : public Employee
 {
 public:
     ITS();
-    void showOptions();
     void addUser();
     void removeUser();
 

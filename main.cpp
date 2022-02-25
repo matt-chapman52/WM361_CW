@@ -19,7 +19,6 @@ int main()
 
     Login loginUser;
     Employee employee;
-    // ITS it; Get rid of constructor!!
     HumanResources HR;
     // Manager manager;
 
@@ -47,7 +46,24 @@ int main()
             emp.viewLeave();
             break;
         case 4:
-            // Get the role
+            if (!strcasecmp(role.c_str(), "Employee"))
+            {
+                cout << "No more options to show" << endl;
+            }
+            else if (!strcasecmp(role.c_str(), "IT"))
+            {
+                ITS it;
+            }
+            else if (!strcasecmp(role.c_str(), "HR"))
+            {
+                HumanResources HR;
+            }
+            else if (!strcasecmp(role.c_str(), "Manager"))
+            {
+                // Manager manager;
+                // manager.showoptions();
+            }
+
         case 5:
             exit(0);
             break;

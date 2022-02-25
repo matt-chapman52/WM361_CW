@@ -9,6 +9,9 @@
 // Constructor
 ITS::ITS()
 {
+}
+void ITS::showOptions()
+{
     int option;
 
     cout << "\n----- Welcome ----"

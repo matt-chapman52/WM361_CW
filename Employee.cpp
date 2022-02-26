@@ -255,7 +255,7 @@ vector <string> Employee::editData(string fileName, string tempName, int empNum,
     fstream temp;
     temp.open(tempName, ios::app | ios::out);
 
-    // Perfom until end of file is reached
+    // Perform until end of file is reached
     while (!file.eof()) {
         while (getline(file, line)) {
             row.clear();

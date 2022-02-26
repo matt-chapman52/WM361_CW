@@ -14,6 +14,9 @@ int Employee::showOptions()
 {
     int option;
 
+    cout << "Enter employee number: " << endl;
+    cin >> employeeNumber; // Automatically done once login code complete
+
     cout << "\n----- Welcome -----"
             "\nWhat would you like to do?"
          << endl;
@@ -146,9 +149,6 @@ void Employee::viewLeave()
 
     int option;
 
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber; // Automatically done once login code complete
-
     // Ask user what to do next
 
     cout << "\n----- Change and Request Leave -----"
@@ -160,28 +160,74 @@ void Employee::viewLeave()
     cout << "(4) Exit" << endl;
     cin >> option;
 
-    switch (option)
-    {
-    case 1:
-        requestLeave();
-        break;
+    switch (option) {
+        case 1:
+            requestLeave();
+            break;
 
         case 2:
             //do the other ones - HENRY
             break;
 
-
-
+        case 3:
+            listLeave(employeeNumber);
+            break;
+        case 4:
+            //Should just exit???
+            break;
 
     }
-
 
     // Return to home page
 }
 
 void Employee::changeLeave()
 {
+    string startDate, endDate;
+    cout << "\nEnter new start date in form DDMMYYYY: " << endl;
+    cin >> startDate;
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate);
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+    cout << "\nEnter new end date in for DDMMYYYY: " << endl;
+    cin >> endDate;
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate);
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review");
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+
+    listLeave(employeeNumber);
 }
+
+void Employee::listLeave(int empNum)
+{
+    vector <string> data;
+    data = readData("Data/employee_leave.csv", employeeNumber);
+    cout << "(1) Start:" << data[2] << " End:" << data[3] << endl;
+    int exitNum = 2;
+
+    int inputCheck = 1;
+    while (inputCheck == 1){
+        cout << "\nEnter leave number to edit or " << exitNum << " to exit" << endl;
+        int option;
+        cin >> option;
+
+        if (option < exitNum) {
+            inputCheck = 0;
+            changeLeave();
+
+        } else if (option == exitNum) {
+            inputCheck = 0;
+            break;
+        }
+    }
+
+}
+
+
 
 vector<string> Employee::readData(string fileName, int empNum)
 {
@@ -205,6 +251,7 @@ vector<string> Employee::readData(string fileName, int empNum)
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
+            cout << tempEmpNum;
 
             //this is pointless <3
             if (empNum == tempEmpNum)
@@ -213,12 +260,15 @@ vector<string> Employee::readData(string fileName, int empNum)
                 empFound = true;
                 cout << tempEmpNum << endl;
             }
+            cout << empFound;
             if (empFound == false)
             {
                 output.push_back("Error in retrieving data");
                 cout << "Unable to retrieve data" << endl;
             }
+
         }
+
     }
     file.close();
     return output;

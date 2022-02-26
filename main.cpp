@@ -36,7 +36,6 @@ int main() {
     }
     cout << role << endl;
 
-
     while (true) {
         option = emp.showOptions();
         switch (option) {
@@ -69,7 +68,7 @@ int main() {
                     if (option == 1) {
                         ITS it;
                     } else if (option == 2) {
-                         Manager manager;
+                        Manager manager;
                     } else {
                         cout << "Enter a valid number" << endl;
                     }
@@ -83,7 +82,7 @@ int main() {
                     if (option == 1) {
                         HumanResources HR;
                     } else if (option == 2) {
-                         Manager manager;
+                        Manager manager;
                     } else {
                         cout << "Enter a valid number" << endl;
                     }

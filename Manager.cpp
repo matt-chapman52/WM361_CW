@@ -8,6 +8,14 @@
 
 Manager::Manager() {
     int option;
+    string emp_details = "Data/employee_details.csv";
+    string emp_leave = "Data/employee_leave.csv";
+
+    Employee emp;
+
+    vector<vector<string> > all_leave;
+
+    all_leave = emp.readMultipleData(emp_leave, 1, 0);
 
     cout << "\n----- Manager Menu ----"
          << "\nWhat would you like to do?" << endl;
@@ -18,10 +26,10 @@ Manager::Manager() {
 
     switch (option) {
         case 1:
-            reviewLeave();
+            reviewLeave(all_leave);
             break;
         case 2:
-            viewUpcomingLeave();
+            viewUpcomingLeave(all_leave);
             break;
         case 3:
             exit(0);
@@ -31,31 +39,30 @@ Manager::Manager() {
     }
 }
 
-void Manager::reviewLeave() {
-    string emp_details = "Data/employee_details.csv";
-    string emp_leave = "Data/employee_leave.csv";
-
-    Employee emp;
-
-    vector<vector<string> > all_leave;
-
-    all_leave = emp.readMultipleData("Data/employee_details.csv", 2, 0);
-
+void Manager::reviewLeave(vector<vector<string> > all_leave) {
     cout << "----- Leave requested by your employees -----" << endl;
 
     for (int i = 0; i < all_leave.size(); i++){
-        cout << "Employee: " << all_leave[i][0];
-        cout << " Start: " << all_leave[i][2];
-        cout << " End: " << all_leave[i][3] << endl;
+        if (all_leave[i][4] == "In Review") {
+            cout << "Employee: " << all_leave[i][0];
+            cout << " | Start: " << all_leave[i][2];
+            cout << " | End: " << all_leave[i][3] << endl;
+        }
     }
 
     cout << "----- end -----" << endl;
-
-
-//    remove("Data/employee_details.csv");
-//    rename("Data/temp.csv", "Data/employee_details.csv");
 }
 
-void Manager::viewUpcomingLeave(){
+void Manager::viewUpcomingLeave(vector<vector<string> > all_leave){
+    cout << "----- Upcoming leave for your employees -----" << endl;
 
+    for (int i = 0; i < all_leave.size(); i++){
+        if (all_leave[i][4] == "Approved") {
+            cout << "Employee: " << all_leave[i][0];
+            cout << " | Start: " << all_leave[i][2];
+            cout << " | End: " << all_leave[i][3] << endl;
+        }
+    }
+
+    cout << "----- end -----" << endl;
 }

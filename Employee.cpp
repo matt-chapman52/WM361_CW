@@ -5,13 +5,11 @@
  */
 #include "Employee.h"
 
-Employee::Employee()
-{
+Employee::Employee() {
     // TO DO - USe job role to call additional classes
 }
 
-int Employee::showOptions()
-{
+int Employee::showOptions() {
     int option;
 
     cout << "\n----- Welcome -----"
@@ -27,25 +25,21 @@ int Employee::showOptions()
     return option;
 }
 
-int Employee::isManager(int empNum)
-{
+int Employee::isManager(int empNum) {
     string emp_details = "Data/employee_details.csv";
     string line, word;
-    vector<string> row;
+    vector <string> row;
     int tempEmpNum;
 
     fstream file;
     file.open(emp_details, ios::in);
 
-    while (!file.eof())
-    {
-        while (getline(file, line))
-        {
+    while (!file.eof()) {
+        while (getline(file, line)) {
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')) {
                 row.push_back(word);
             }
             tempEmpNum = stoi(row[6]);
@@ -61,10 +55,9 @@ int Employee::isManager(int empNum)
 
 }
 
-void Employee::getPersonalDetails()
-{
+void Employee::getPersonalDetails() {
     string emp_details = "Data/employee_details.csv";
-    vector<string> row;
+    vector <string> row;
     int tempEmpNum;
 
     cout << "Enter employee number: " << endl;
@@ -82,11 +75,10 @@ void Employee::getPersonalDetails()
     cout << "Email: " << row[3] << endl;
 }
 
-void Employee::changePersonalDetails()
-{
+void Employee::changePersonalDetails() {
     // string line, word;
     string emp_details = "Data/employee_details.csv";
-    vector<string> row;
+    vector <string> row;
     int decision;
     string newData;
     // int tempEmpNumber;
@@ -103,33 +95,30 @@ void Employee::changePersonalDetails()
          << "\n(2) Surname" << endl;
     cin >> decision;
 
-    switch (decision)
-    {
-    case 1:
-        cout << "Enter new first name: " << endl;
-        cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData);
-        break;
-    case 2:
-        cout << "Enter new surname name: " << endl;
-        cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
-        break;
+    switch (decision) {
+        case 1:
+            cout << "Enter new first name: " << endl;
+            cin >> newData;
+            editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData);
+            break;
+        case 2:
+            cout << "Enter new surname name: " << endl;
+            cin >> newData;
+            editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
+            break;
     }
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }
 
-void Employee::requestLeave()
-{
+void Employee::requestLeave() {
     // TO DO:-
     // Command line interface to change leave. Details stored in a .txt file
 }
 
-void Employee::viewLeave()
-{
-    vector<string> row;
+void Employee::viewLeave() {
+    vector <string> row;
     string leave_details = "Data/employee_leave.csv";
     string emp_details = "Data/employee_details.csv";
     int option;
@@ -149,80 +138,72 @@ void Employee::viewLeave()
     cout << "(4) Exit" << endl;
     cin >> option;
 
-    switch (option)
-    {
-    case 1:
-        cout << "\n----- Request Leave ------" << endl;
-        cout << "\nEnter start date in form DDMMYYYY: " << endl;
-        cin >> startDate;
-        cout << "Enter end date in for DDMMYYYY: " << endl;
-        cin >> endDate;
+    switch (option) {
+        case 1:
+            cout << "\n----- Request Leave ------" << endl;
+            cout << "\nEnter start date in form DDMMYYYY: " << endl;
+            cin >> startDate;
+            cout << "Enter end date in for DDMMYYYY: " << endl;
+            cin >> endDate;
 
-        row.clear();
-        row = readData(emp_details, employeeNumber);
-        managerEmpNum = stoi(row[6]);
+            row.clear();
+            row = readData(emp_details, employeeNumber);
+            managerEmpNum = stoi(row[6]);
 
-        row.clear();
-        row.push_back(to_string(employeeNumber));
-        row.push_back(to_string(managerEmpNum));
-        row.push_back(startDate);
-        row.push_back(endDate);
-        row.push_back("In Review");
+            row.clear();
+            row.push_back(to_string(employeeNumber));
+            row.push_back(to_string(managerEmpNum));
+            row.push_back(startDate);
+            row.push_back(endDate);
+            row.push_back("In Review");
 
-        writeData(leave_details, row);
-        // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?
-        // Or just have different rows but make sure we read and display them all.
+            writeData(leave_details, row);
+            // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?
+            // Or just have different rows but make sure we read and display them all.
 
-    case 2:
-        // TO DO: - Henry
-    case 3:
-        // TO DO: - Henry
-    case 4:
-        exit(0);
+        case 2:
+            // TO DO: - Henry
+        case 3:
+            // TO DO: - Henry
+        case 4:
+            exit(0);
 
-    default:
-        cout
-            << "Enter a value between 1 and 4";
-        break;
+        default:
+            cout
+                    << "Enter a value between 1 and 4";
+            break;
     }
 
     // Return to home page
 }
 
-void Employee::changeLeave()
-{
+void Employee::changeLeave() {
 }
 
-vector<string> Employee::readData(string fileName, int empNum)
-{
+vector <string> Employee::readData(string fileName, int empNum) {
     string line, word;
-    vector<string> row, output;
+    vector <string> row, output;
     int tempEmpNum;
     bool empFound = false;
 
     fstream file;
     file.open(fileName, ios::in);
 
-    while (!file.eof())
-    {
-        while (getline(file, line))
-        {
+    while (!file.eof()) {
+        while (getline(file, line)) {
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')) {
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
 
-            if (empNum == tempEmpNum)
-            {
+            if (empNum == tempEmpNum) {
                 output = row;
                 empFound = true;
             }
-            if (empFound == false)
-            {
+            if (empFound == false) {
                 output.push_back("Error in retrieving data");
                 cout << "Unable to retrieve data" << endl;
             }
@@ -232,30 +213,25 @@ vector<string> Employee::readData(string fileName, int empNum)
     return output;
 }
 
-vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, int num)
-{
+vector <vector<string> > Employee::readMultipleData(string fileName, int rowPos, int num) {
     string line, word;
-    vector<string> row;
-    vector<vector<string> > output;
+    vector <string> row;
+    vector <vector<string> > output;
     int tempNum;
 //    bool empFound = false;
 
     fstream file;
     file.open(fileName, ios::in);
 
-    while (!file.eof())
-    {
-        while (getline(file, line))
-        {
+    while (!file.eof()) {
+        while (getline(file, line)) {
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')) {
                 row.push_back(word);
-                tempNum = stoi(row[rowPos]);
             }
-
+            tempNum = stoi(row[rowPos]);
             if (num == tempNum) {
                 output.push_back(row);
             }
@@ -265,10 +241,9 @@ vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, 
     return output;
 }
 
-vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData)
-{
+vector <string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData) {
     string line, word;
-    vector<string> row, output;
+    vector <string> row, output;
     int tempEmpNum;
     bool empFound = false;
 
@@ -281,42 +256,31 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
     temp.open(tempName, ios::app | ios::out);
 
     // Perfom until end of file is reached
-    while (!file.eof())
-    {
-        while (getline(file, line))
-        {
+    while (!file.eof()) {
+        while (getline(file, line)) {
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')) {
                 // Append to an empty vector
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
 
-            if (tempEmpNum != empNum)
-            {
+            if (tempEmpNum != empNum) {
                 // Re-write the data
-                for (int i = 0; i < row.size(); i++)
-                {
+                for (int i = 0; i < row.size(); i++) {
                     temp << row[i] << ",";
                 }
                 temp << "\n";
-            }
-            else
-            {
+            } else {
                 empFound = true;
                 output = row;
-                for (int i = 0; i < row.size(); i++)
-                {
-                    if (i == field)
-                    {
+                for (int i = 0; i < row.size(); i++) {
+                    if (i == field) {
                         // Replace the current data with new data
                         temp << newData << ",";
-                    }
-                    else
-                    {
+                    } else {
                         temp << row[i] << ",";
                     }
                 }
@@ -324,8 +288,7 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
             }
         }
     }
-    if (empFound == false)
-    {
+    if (empFound == false) {
         output.push_back("Error in retrieving data");
         cout << "Unable to retrieve data" << endl;
     }
@@ -336,30 +299,24 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
     return output;
 }
 
-void Employee::writeData(string fileName, vector<string> data)
-{
+void Employee::writeData(string fileName, vector <string> data) {
     fstream file;
     file.open(fileName, ios::app | ios::out);
 
-    if (file.is_open())
-    {
-        for (int i = 0; i < data.size(); i++)
-        {
+    if (file.is_open()) {
+        for (int i = 0; i < data.size(); i++) {
             file << data[i] << ",";
         }
         file << "\n";
         cout << "Data successfully appended!" << endl;
-    }
-    else
-    {
+    } else {
         cout << "Unable to open file" << endl;
     }
 }
 
-void Employee::deleteData(string fileName, string tempFile, int empNum)
-{
+void Employee::deleteData(string fileName, string tempFile, int empNum) {
     string line, word;
-    vector<string> row;
+    vector <string> row;
     int tempEmpNum;
 
     // Open the file with data as read-only
@@ -370,26 +327,21 @@ void Employee::deleteData(string fileName, string tempFile, int empNum)
     fstream temp;
     temp.open(tempFile, ios::app | ios::out);
 
-    while (!file.eof())
-    {
-        while (getline(file, line))
-        {
+    while (!file.eof()) {
+        while (getline(file, line)) {
             // Split each line up
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')) {
                 // Add each word to a vector cell
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
 
             // Only write the data which is not to be deleted
-            for (int i = 0; i < row.size(); i++)
-            {
-                if (tempEmpNum != empNum)
-                {
+            for (int i = 0; i < row.size(); i++) {
+                if (tempEmpNum != empNum) {
                     temp << row[i] << ",";
                 }
             }

@@ -19,8 +19,8 @@ class Manager : public Employee
 {
 public:
     Manager();
-    void reviewLeave();
-    void viewUpcomingLeave();
+    void reviewLeave(vector<vector<string> > all_leave);
+    void viewUpcomingLeave(vector<vector<string> > all_leave);
 
 private:
     string userFirstName;

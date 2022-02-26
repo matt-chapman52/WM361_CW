@@ -198,6 +198,39 @@ vector<string> Employee::readData(string fileName, int empNum)
     return output;
 }
 
+vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, int num)
+{
+    string line, word;
+    vector<string> row;
+    vector<vector<string> > output;
+    int tempNum;
+//    bool empFound = false;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+                tempNum = stoi(row[rowPos]);
+            }
+
+            if (num == tempNum) {
+                output.push_back(row);
+            }
+        }
+    }
+    file.close();
+    return output;
+}
+
 vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData)
 {
     string line, word;

@@ -2,8 +2,8 @@
 // Created by Scott Tomlins on 26/02/2022.
 //
 
-#ifndef WM361_CW_MANAGER_H
-#define WM361_CW_MANAGER_H
+#ifndef MANAGER_H
+#define MANAGER_H
 
 #include <iostream>
 #include <fstream>

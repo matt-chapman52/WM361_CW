@@ -8,6 +8,7 @@
 
 #include "ITS.h"
 #include "Employee.h"
+#include "Manager.h"
 #include "HumanResources.h"
 #include "Login.h"
 
@@ -55,8 +56,8 @@ int main() {
                 } else if (!strcasecmp(role.c_str(), "HR")) {
                     HumanResources HR;
                 } else if (!strcasecmp(role.c_str(), "Employee Manager")) {
-                    // Manager manager;
-                    // manager.showoptions();
+                    Manager manager;
+//                    manager.showoptions();
                     break;
                 } else if (!strcasecmp(role.c_str(), "IT Manager")) {
                     int option;
@@ -68,7 +69,7 @@ int main() {
                     if (option == 1) {
                         ITS it;
                     } else if (option == 2) {
-                        // Manager manager;
+                         Manager manager;
                     } else {
                         cout << "Enter a valid number" << endl;
                     }
@@ -82,7 +83,7 @@ int main() {
                     if (option == 1) {
                         HumanResources HR;
                     } else if (option == 2) {
-                        // Manager manager;
+                         Manager manager;
                     } else {
                         cout << "Enter a valid number" << endl;
                     }

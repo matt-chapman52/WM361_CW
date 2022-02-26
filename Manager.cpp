@@ -55,3 +55,7 @@ void Manager::reviewLeave() {
 //    remove("Data/employee_details.csv");
 //    rename("Data/temp.csv", "Data/employee_details.csv");
 }
+
+void Manager::viewUpcomingLeave(){
+
+}

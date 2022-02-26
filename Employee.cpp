@@ -27,6 +27,40 @@ int Employee::showOptions()
     return option;
 }
 
+int Employee::isManager(int empNum)
+{
+    string emp_details = "Data/employee_details.csv";
+    string line, word;
+    vector<string> row;
+    int tempEmpNum;
+
+    fstream file;
+    file.open(emp_details, ios::in);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+            }
+            tempEmpNum = stoi(row[6]);
+
+            if (empNum == tempEmpNum) {
+                file.close();
+                return 1;
+            }
+        }
+    }
+    file.close();
+    return 0;
+
+}
+
 void Employee::getPersonalDetails()
 {
     string emp_details = "Data/employee_details.csv";

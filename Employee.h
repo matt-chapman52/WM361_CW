@@ -36,6 +36,7 @@ public:
     void requestLeave();
     void viewLeave();
     void changeLeave();
+    int isManager(int empNum);
     vector<string> readData(string fileName, int empNum);
     vector<vector<string> > readMultipleData(string fileName, int rowPos, int num);
     vector<string> editData(string fileName, string tempName, int empNum, int field, string newData);

@@ -20,7 +20,8 @@ To edit this project and run locally:
 
 
 ## Compile and Run
-* Make sure your terminal is in the project directory
+Make sure your terminal is in the project directory
+
 On Mac 
 * type: make
 * Once compiled type: ./main 

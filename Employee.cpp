@@ -99,12 +99,12 @@ void Employee::changePersonalDetails()
     case 1:
         cout << "Enter new first name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData,1);
         break;
     case 2:
         cout << "Enter new surname name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData,1);
         break;
     }
     remove("Data/employee_details.csv");
@@ -201,21 +201,21 @@ void Employee::viewLeave()
     // Return to home page
 }
 
-void Employee::changeLeave()
+void Employee::changeLeave(int desiredRow)
 {
     string startDate, endDate;
     cout << "\nEnter new start date in form DDMMYYYY: " << endl;
     cin >> startDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate);
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate,desiredRow);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
     cout << "\nEnter new end date in for DDMMYYYY: " << endl;
     cin >> endDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate);
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate,desiredRow);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
 
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review");
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review",desiredRow);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
 
@@ -249,7 +249,7 @@ void Employee::listLeave(int empNum)
         if (option < exitNum && option > 0)
         {
             inputCheck = 0;
-            changeLeave();
+            changeLeave(option);
         }
         else if (option == exitNum)
         {
@@ -330,12 +330,13 @@ vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, 
     return output;
 }
 
-vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData)
+vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData, int desiredRow)
 {
     string line, word;
     vector<string> row, output;
     int tempEmpNum;
     bool empFound = false;
+    int empRowNum = 1;
 
     // Open the current file as read-only
     fstream file;
@@ -360,7 +361,7 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
                 tempEmpNum = stoi(row[0]);
             }
 
-            if (tempEmpNum != empNum)
+            if (tempEmpNum != empNum || (tempEmpNum == empNum && empRowNum != desiredRow))
             {
                 // Re-write the data
                 for (int i = 0; i < row.size(); i++)
@@ -368,24 +369,25 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
                     temp << row[i] << ",";
                 }
                 temp << "\n";
+
+                if (tempEmpNum == empNum){
+                    empRowNum++;
+                }
             }
             else
             {
                 empFound = true;
                 output = row;
-                for (int i = 0; i < row.size(); i++)
-                {
-                    if (i == field)
-                    {
+                for (int i = 0; i < row.size(); i++) {
+                    if (i == field) {
                         // Replace the current data with new data
                         temp << newData << ",";
-                    }
-                    else
-                    {
+                    } else {
                         temp << row[i] << ",";
                     }
                 }
                 temp << "\n";
+                empRowNum++;
             }
         }
     }

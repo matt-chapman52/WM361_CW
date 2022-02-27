@@ -45,7 +45,7 @@ void HumanResources::changeManager()
     cin >> newManager;
 
     Employee emp;
-    emp.editData(emp_data, "Data/temp.csv", empNum, 6, newManager);
+    emp.editData(emp_data, "Data/temp.csv", empNum, 6, newManager,1);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
@@ -65,7 +65,7 @@ void HumanResources ::changeJobRole()
 
     Employee emp;
 
-    emp.editData(emp_data, "Data/temp.csv", empNum, 5, newRole);
+    emp.editData(emp_data, "Data/temp.csv", empNum, 5, newRole,1);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");

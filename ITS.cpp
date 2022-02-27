@@ -72,8 +72,7 @@ void ITS::addUser()
     row.push_back(userRole);
     row.push_back(to_string(userManager));
 
-    Employee emp;
-    emp.writeData(emp_details, row);
+    writeData(emp_details, row);
 }
 
 void ITS::removeUser()
@@ -83,8 +82,7 @@ void ITS::removeUser()
     cout << "Enter employee number: " << endl;
     cin >> userEmployeeNumber;
 
-    Employee emp;
-    emp.deleteData(emp_details, "Data/temp.csv", userEmployeeNumber);
+    deleteData(emp_details, "Data/temp.csv", userEmployeeNumber);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");

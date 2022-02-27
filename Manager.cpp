@@ -10,10 +10,9 @@ Manager::Manager()
     int option;
     string emp_details = "Data/employee_details.csv";
     string emp_leave = "Data/employee_leave.csv";
-    Employee emp;
     vector<vector<string> > all_leave;
 
-    all_leave = emp.readMultipleData(emp_leave, 1, 0);
+    all_leave = readMultipleData(emp_leave, 1, 0);
 
     cout << "\n----- Manager Menu ----"
          << "\nWhat would you like to do?" << endl;

@@ -22,7 +22,6 @@ private:
     string firstName;
     string surname;
     string email;
-    int employeeNumber;
     string gender;
     int age;
     string password;
@@ -37,6 +36,7 @@ public:
     void viewLeave();
     void changeLeave();
     int isManager(int empNum);
+    int employeeNumber;
     vector<string> readData(string fileName, int empNum);
     vector<vector<string> > readMultipleData(string fileName, int rowPos, int num);
     vector<string> editData(string fileName, string tempName, int empNum, int field, string newData);

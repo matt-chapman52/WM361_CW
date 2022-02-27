@@ -6,22 +6,18 @@
 
 #include "Login.h"
 
-// Constructor
-Login::Login()
+int Login::VerifyEmployee()
 {
     cout << "\n----- Welcome -----"
          << "\nLogin to Continue"
          << "\nPlease enter your employee number" << endl;
     cin >> loginEmployeeNum;
-    //VerifyEmployee();
-}
-
-void Login::VerifyEmployee()
-{
+    return loginEmployeeNum;
+    /*
     int rows = 0;
     int choice;
     string line;
-    ifstream file("Data/employee_details.csv")
+    ifstream file("Data/employee_details.csv");
 
     while (getline(file, line))
     {
@@ -38,7 +34,7 @@ void Login::VerifyEmployee()
         // "This employee number does not exist, enter 1 to try again or 2 to register for the annual leave service with IT"
         if (choice==1)
         {
-            Login()
+            Login();
         }
         else
         {
@@ -46,16 +42,17 @@ void Login::VerifyEmployee()
         }
         
     }
+    */
 
 }
 
-int Login::VerifyPassword()
+bool Login::VerifyPassword()
 {
     cout << "/nEnter your Password" << endl;
     cin >> loginPassword;
     cout << "/nLogin successful!" << endl;
     // return employee number if successful
     // return 0 if unsuccessful
-    return 0
+    return false;
 }
 

@@ -11,7 +11,7 @@ ITS::ITS()
 {
     int option;
 
-    cout << "\n----- Welcome ----"
+    cout << "\n----- IT Menu ----"
          << "\nWhat would you like to do?" << endl;
     cout << "(1) Add a new user" << endl;
     cout << "(2) Delete a user" << endl;

@@ -7,7 +7,6 @@
 
 Employee::Employee()
 {
-    // TO DO - USe job role to call additional classes
 }
 
 int Employee::showOptions()
@@ -22,14 +21,46 @@ int Employee::showOptions()
          << endl;
     cout << "(1) Show my personal details" << endl;
     cout << "(2) Change my personal details" << endl;
-    cout << "(3) Request Leave" << endl;
-    cout << "(4) View Leave" << endl;
-    cout << "(5) Change Leave" << endl;
-    cout << "(6) Show more options" << endl;
-    cout << "(7) Exit" << endl;
+    cout << "(3) Leave Menu" << endl;
+    cout << "(4) Show more options" << endl;
+    cout << "(5) Exit" << endl;
     cin >> option;
 
     return option;
+}
+
+int Employee::isManager(int empNum)
+{
+    string emp_details = "Data/employee_details.csv";
+    string line, word;
+    vector<string> row;
+    int tempEmpNum;
+
+    fstream file;
+    file.open(emp_details, ios::in);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
+            {
+                row.push_back(word);
+            }
+            tempEmpNum = stoi(row[6]);
+
+            if (empNum == tempEmpNum)
+            {
+                file.close();
+                return 1;
+            }
+        }
+    }
+    file.close();
+    return 0;
 }
 
 void Employee::getPersonalDetails()
@@ -37,9 +68,6 @@ void Employee::getPersonalDetails()
     string emp_details = "Data/employee_details.csv";
     vector<string> row;
     int tempEmpNum;
-
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber;
 
     // Method for reading data from csv file
     row = readData(emp_details, employeeNumber);
@@ -55,17 +83,12 @@ void Employee::getPersonalDetails()
 
 void Employee::changePersonalDetails()
 {
-    // string line, word;
     string emp_details = "Data/employee_details.csv";
     vector<string> row;
     int decision;
     string newData;
-    // int tempEmpNumber;
-    // string newFirstName, newSurname, newGender, newAge;
-    cout << "\n-----Change Personal Details-----" << endl;
 
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber;
+    cout << "\n-----Change Personal Details-----" << endl;
 
     readData(emp_details, employeeNumber);
 
@@ -100,6 +123,7 @@ void Employee::requestLeave()
         string leave_details = "Data/employee_leave.csv";
         string emp_details = "Data/employee_details.csv";
         string startDate, endDate;
+
 
         cout << "\n----- Request Leave ------" << endl;
         cout << "\nEnter start date in form DDMMYYYY: " << endl;
@@ -259,14 +283,47 @@ vector<string> Employee::readData(string fileName, int empNum)
             if (empNum == tempEmpNum)
             {
                 output = row;
+                cout << empNum << endl;
                 empFound = true;
                 cout << tempEmpNum << endl;
             }
-            cout << empFound;
-            if (empFound == false)
+        }
+        if (empFound == false)
+        {
+            output.push_back("Error in retrieving data");
+            cout << "Employee not found - unable to retrieve data" << endl;
+        }
+    }
+    file.close();
+    return output;
+}
+
+vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, int num)
+{
+    string line, word;
+    vector<string> row;
+    vector<vector<string> > output;
+    int tempNum;
+    //    bool empFound = false;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    while (!file.eof())
+    {
+        while (getline(file, line))
+        {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ','))
             {
-                output.push_back("Error in retrieving data");
-                cout << "Unable to retrieve data" << endl;
+                row.push_back(word);
+            }
+            tempNum = stoi(row[rowPos]);
+            if (num == tempNum)
+            {
+                output.push_back(row);
             }
 
         }
@@ -291,7 +348,7 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
     fstream temp;
     temp.open(tempName, ios::app | ios::out);
 
-    // Perfom until end of file is reached
+    // Perform until end of file is reached
     while (!file.eof())
     {
         while (getline(file, line))

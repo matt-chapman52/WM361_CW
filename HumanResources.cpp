@@ -1,6 +1,6 @@
 /**
  * @file HumanResources.cpp
- * @author your name (you@domain.com)
+ * @author 1943001
  * @brief
  */
 
@@ -8,7 +8,29 @@
 
 HumanResources::HumanResources()
 {
-    // Constructor
+    int option;
+
+    cout << "\n----- HR Menu ----"
+         << "\nWhat would you like to do?" << endl;
+    cout << "(1) Change an employee's manager" << endl;
+    cout << "(2) Change an employee's job role" << endl;
+    cout << "(3) Return" << endl;
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        changeManager();
+        break;
+    case 2:
+        changeJobRole();
+        break;
+    case 3:
+        exit(0);
+        break;
+    default:
+        cout << "Enter a value between 1 and 3" << endl;
+    }
 }
 
 void HumanResources::changeManager()

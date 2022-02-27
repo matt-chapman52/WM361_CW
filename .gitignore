@@ -40,3 +40,6 @@ main
 !employee_details.csv
 !employee_leave.csv
 
+# Other Stuff
+/.vscode/
+/.idea/

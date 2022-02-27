@@ -1,6 +1,6 @@
 /**
  * @file HumanResources.cpp
- * @author your name (you@domain.com)
+ * @author 1943001
  * @brief
  */
 

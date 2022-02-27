@@ -35,6 +35,7 @@ public:
     void requestLeave();
     void viewLeave();
     void changeLeave();
+    void listLeave(int empNum);
     int isManager(int empNum);
     int employeeNumber;
     vector<string> readData(string fileName, int empNum);

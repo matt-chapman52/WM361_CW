@@ -13,6 +13,9 @@ int Employee::showOptions()
 {
     int option;
 
+    cout << "Enter employee number: " << endl;
+    cin >> employeeNumber; // Automatically done once login code complete
+
     cout << "\n----- Welcome -----"
             "\nWhat would you like to do?"
          << endl;
@@ -107,37 +110,21 @@ void Employee::changePersonalDetails()
         editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
         break;
     }
-
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }
 
 void Employee::requestLeave()
 {
-    // TO DO:-
-    // Command line interface to change leave. Details stored in a .txt file
-}
+    int oneMore = 1;
+    while (oneMore == 1) {
 
-void Employee::viewLeave()
-{
-    vector<string> row;
-    string leave_details = "Data/employee_leave.csv";
-    string emp_details = "Data/employee_details.csv";
-    int option;
-    string startDate, endDate;
+        vector <string> row;
+        string leave_details = "Data/employee_leave.csv";
+        string emp_details = "Data/employee_details.csv";
+        string startDate, endDate;
 
-    cout << "\n----- Change and Request Leave -----"
-         << "\nWhat would you like to do?"
-         << endl;
-    cout << "(1) Request Leave" << endl;
-    cout << "(2) Change Leave" << endl;
-    cout << "(3) View Leave" << endl;
-    cout << "(4) Exit" << endl;
-    cin >> option;
 
-    switch (option)
-    {
-    case 1:
         cout << "\n----- Request Leave ------" << endl;
         cout << "\nEnter start date in form DDMMYYYY: " << endl;
         cin >> startDate;
@@ -156,20 +143,60 @@ void Employee::viewLeave()
         row.push_back("In Review");
 
         writeData(leave_details, row);
-        // TO DO: - Henry. Can we append more dates to the same row for people who have booked in multiple leave dates.?
-        // Or just have different rows but make sure we read and display them all.
 
-    case 2:
-        // TO DO: - Henry
-    case 3:
-        // TO DO: - Henry
-    case 4:
-        exit(0);
+        int inputCheck = 1;
 
-    default:
-        cout
-            << "Enter a value between 1 and 4";
-        break;
+        while (inputCheck == 1) {
+            int another;
+
+            cout << "\nWould you look to book another absence?" << endl;
+            cout << "(1) Yes" << endl;
+            cout << "(2) No" << endl;
+
+            cin >> another;
+
+            if (another == 1) {
+                inputCheck = 0;
+            }
+            else if  (another == 2) {
+                oneMore = 0;
+                cout << oneMore << endl;
+                break;
+            }
+        }
+    }
+}
+
+void Employee::viewLeave()
+{
+
+    int option;
+
+    cout << "\n----- Change and Request Leave -----"
+         << "\nWhat would you like to do?"
+         << endl;
+    cout << "(1) Request Leave" << endl;
+    cout << "(2) Change Leave" << endl;
+    cout << "(3) View Leave" << endl;
+    cout << "(4) Exit" << endl;
+    cin >> option;
+
+    switch (option) {
+        case 1:
+            requestLeave();
+            break;
+
+        case 2:
+            //do the other ones - HENRY
+            break;
+
+        case 3:
+            listLeave(employeeNumber);
+            break;
+        case 4:
+            //Should just exit???
+            break;
+
     }
 
     // Return to home page
@@ -177,8 +204,57 @@ void Employee::viewLeave()
 
 void Employee::changeLeave()
 {
+    string startDate, endDate;
+    cout << "\nEnter new start date in form DDMMYYYY: " << endl;
+    cin >> startDate;
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate);
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+    cout << "\nEnter new end date in for DDMMYYYY: " << endl;
+    cin >> endDate;
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate);
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review");
+    remove("Data/employee_leave.csv");
+    rename("Data/temp.csv","Data/employee_leave.csv");
+
+    listLeave(employeeNumber);
 }
 
+void Employee::listLeave(int empNum)
+{
+    vector <string> data;
+    vector <vector<string> > all_emp_leave;
+    all_emp_leave = readMultipleData("Data/employee_leave.csv", 0, employeeNumber);
+    //data = readData("Data/employee_leave.csv", employeeNumber);
+
+    for (int i = 0; i < all_emp_leave.size(); i++) {
+        cout << "(" << i + 1 << ") ";
+        cout << " | Start: " << all_emp_leave[i][2];
+        cout << " | End: " << all_emp_leave[i][3] << endl;
+    }
+
+    //cout << "(1) Start:" << data[2] << " End:" << data[3] << endl;
+    int exitNum = all_emp_leave.size() + 1;
+
+    int inputCheck = 1;
+    while (inputCheck == 1){
+        cout << "\nEnter leave number to edit or " << exitNum << " to exit" << endl;
+        int option;
+        cin >> option;
+
+        if (option < exitNum && option > 0) {
+            inputCheck = 0;
+            changeLeave();
+
+        } else if (option == exitNum) {
+            inputCheck = 0;
+            break;
+        }
+    }
+}
 vector<string> Employee::readData(string fileName, int empNum)
 {
     string line, word;
@@ -201,12 +277,15 @@ vector<string> Employee::readData(string fileName, int empNum)
                 row.push_back(word);
                 tempEmpNum = stoi(row[0]);
             }
+            cout << tempEmpNum;
 
+            //this is pointless <3
             if (empNum == tempEmpNum)
             {
                 output = row;
                 cout << empNum << endl;
                 empFound = true;
+                cout << tempEmpNum << endl;
             }
         }
         if (empFound == false)
@@ -246,7 +325,9 @@ vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, 
             {
                 output.push_back(row);
             }
+
         }
+
     }
     file.close();
     return output;

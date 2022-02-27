@@ -44,7 +44,7 @@ void HumanResources::changeManager()
     cout << "\nEnter employee's new manager's employee number" << endl;
     cin >> newManager;
 
-    editData(emp_data, "Data/temp.csv", empNum, 6, newManager, 1);
+    editData(emp_data, "Data/temp.csv", empNum, 0, 6, newManager, 1);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
@@ -62,7 +62,7 @@ void HumanResources ::changeJobRole()
     cout << "\nEnter employee's new job role (Enigneer, Manager, ITS, HR): " << endl;
     cin >> newRole;
 
-    editData(emp_data, "Data/temp.csv", empNum, 5, newRole, 1);
+    editData(emp_data, "Data/temp.csv", empNum, 0, 5, newRole, 1);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");

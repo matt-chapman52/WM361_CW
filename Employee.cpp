@@ -99,12 +99,12 @@ void Employee::changePersonalDetails()
     case 1:
         cout << "Enter new first name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData, 1);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 0, 1, newData, 1);
         break;
     case 2:
         cout << "Enter new surname name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData, 1);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 0, 2, newData, 1);
         break;
     }
     remove("Data/employee_details.csv");
@@ -206,16 +206,16 @@ void Employee::changeLeave(int index)
     string startDate, endDate;
     cout << "\nEnter new start date in form DDMMYYYY: " << endl;
     cin >> startDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate, index);
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 0, 2, startDate, index);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
     cout << "\nEnter new end date in for DDMMYYYY: " << endl;
     cin >> endDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate, index);
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 0, 3, endDate, index);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
 
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review", index);
+    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 0, 4, "In Review", index);
     remove("Data/employee_leave.csv");
     rename("Data/temp.csv", "Data/employee_leave.csv");
 
@@ -330,7 +330,7 @@ vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, 
     return output;
 }
 
-vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData, int index)
+vector<string> Employee::editData(string fileName, string tempName, int empNum, int empCol,  int field, string newData, int index)
 {
     string line, word;
     vector<string> row, output;
@@ -354,13 +354,11 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')){
                 // Append to an empty vector
                 row.push_back(word);
-                tempEmpNum = stoi(row[0]);
             }
-
+            tempEmpNum = stoi(row[empCol]);
             if (tempEmpNum != empNum)
             {
                 // Re-write the data
@@ -474,4 +472,62 @@ void Employee::deleteData(string fileName, string tempFile, int empNum)
     }
     file.close();
     temp.close();
+}
+
+void Employee::editData2(string fileName, int index, int field, string newData) {
+    string line, word;
+    string tempName = "Data/temp.csv";
+    vector <string> row;
+    int count = 0;
+    bool empFound = false;
+
+    // Open the current file as read-only
+    fstream file;
+    file.open(fileName, ios::in);
+
+    // Open a temporary file to write the data to
+    fstream temp;
+    temp.open(tempName, ios::app | ios::out);
+
+    // Perform until end of file is reached
+    while (!file.eof()) {
+        while (getline(file, line)) {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ',')) {
+                // Append to an empty vector
+                row.push_back(word);
+            }
+            if (count == index) {
+                empFound = true;
+                for (int i = 0; i < row.size(); i++) {
+                    if (i == field) {
+                        // Replace the current data with new data
+                        temp << newData << ",";
+                    } else {
+                        temp << row[i] << ",";
+                    }
+                }
+                temp << "\n";
+            } else {
+                for (int i = 0; i < row.size(); i++) {
+                    temp << row[i] << ",";
+                }
+                temp << "\n";
+            }
+            count++;
+        }
+    }
+    if (empFound == false) {
+//        output.push_back("Error in retrieving data");
+        cout << "Unable to retrieve data" << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    remove(fileName.c_str());
+    rename(tempName.c_str(), fileName.c_str());
+
 }

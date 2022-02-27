@@ -13,9 +13,11 @@
 #include <vector>
 #include <sstream>
 
+#include "Employee.h"
+
 using namespace std;
 
-class Login // Add child of employees
+class Login : public Employee 
 {
 private:
     bool VerifyPassword();

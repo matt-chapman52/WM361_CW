@@ -12,8 +12,15 @@ int Login::VerifyEmployee()
          << "\nLogin to Continue"
          << "\nPlease enter your employee number" << endl;
     cin >> loginEmployeeNum;
+
+    string emp_details = "Data/employee_details.csv";
+    vector<string> row;
+
+    // Method for reading data from csv file
+    row = readData(emp_details, loginEmployeeNum);
+    
     return loginEmployeeNum;
-    /*
+    /*s
     int rows = 0;
     int choice;
     string line;

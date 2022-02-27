@@ -7,7 +7,6 @@
 
 Employee::Employee()
 {
-    // TO DO - USe job role to call additional classes
 }
 
 int Employee::showOptions()
@@ -67,9 +66,6 @@ void Employee::getPersonalDetails()
     vector<string> row;
     int tempEmpNum;
 
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber;
-
     // Method for reading data from csv file
     row = readData(emp_details, employeeNumber);
 
@@ -84,17 +80,12 @@ void Employee::getPersonalDetails()
 
 void Employee::changePersonalDetails()
 {
-    // string line, word;
     string emp_details = "Data/employee_details.csv";
     vector<string> row;
     int decision;
     string newData;
-    // int tempEmpNumber;
-    // string newFirstName, newSurname, newGender, newAge;
-    cout << "\n-----Change Personal Details-----" << endl;
 
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber;
+    cout << "\n-----Change Personal Details-----" << endl;
 
     readData(emp_details, employeeNumber);
 
@@ -134,11 +125,6 @@ void Employee::viewLeave()
     string emp_details = "Data/employee_details.csv";
     int option;
     string startDate, endDate;
-
-    cout << "Enter employee number: " << endl;
-    cin >> employeeNumber; // Automatically done once login code complete
-
-    // Ask user what to do next
 
     cout << "\n----- Change and Request Leave -----"
          << "\nWhat would you like to do?"

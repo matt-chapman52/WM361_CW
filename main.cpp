@@ -21,15 +21,14 @@ int main()
     string role;
 
     Login loginUser;
-
-    int empNum = loginUser.VerifyEmployee();
-
     Employee emp;
 
-    details = emp.readData("Data/employee_details.csv", empNum);
+    emp.employeeNumber = loginUser.VerifyEmployee();
+
+    details = emp.readData("Data/employee_details.csv", emp.employeeNumber);
     role = details[5];
 
-    int manager_status = emp.isManager(empNum);
+    int manager_status = emp.isManager(emp.employeeNumber);
 
     if (manager_status == 1)
     {

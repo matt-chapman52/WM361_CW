@@ -87,7 +87,6 @@ void Employee::changePersonalDetails()
         editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData);
         break;
     }
-
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");
 }
@@ -149,8 +148,6 @@ void Employee::viewLeave()
 
     int option;
 
-    // Ask user what to do next
-
     cout << "\n----- Change and Request Leave -----"
          << "\nWhat would you like to do?"
          << endl;
@@ -205,9 +202,18 @@ void Employee::changeLeave()
 void Employee::listLeave(int empNum)
 {
     vector <string> data;
-    data = readData("Data/employee_leave.csv", employeeNumber);
-    cout << "(1) Start:" << data[2] << " End:" << data[3] << endl;
-    int exitNum = 2;
+    vector <vector<string> > all_emp_leave;
+    all_emp_leave = readMultipleData("Data/employee_leave.csv", 0, employeeNumber);
+    //data = readData("Data/employee_leave.csv", employeeNumber);
+
+    for (int i = 0; i < all_emp_leave.size(); i++) {
+        cout << "(" << i + 1 << ") ";
+        cout << " | Start: " << all_emp_leave[i][2];
+        cout << " | End: " << all_emp_leave[i][3] << endl;
+    }
+
+    //cout << "(1) Start:" << data[2] << " End:" << data[3] << endl;
+    int exitNum = all_emp_leave.size() + 1;
 
     int inputCheck = 1;
     while (inputCheck == 1){
@@ -215,7 +221,7 @@ void Employee::listLeave(int empNum)
         int option;
         cin >> option;
 
-        if (option < exitNum) {
+        if (option < exitNum && option > 0) {
             inputCheck = 0;
             changeLeave();
 
@@ -224,11 +230,7 @@ void Employee::listLeave(int empNum)
             break;
         }
     }
-
 }
-
-
-
 vector<string> Employee::readData(string fileName, int empNum)
 {
     string line, word;
@@ -269,6 +271,34 @@ vector<string> Employee::readData(string fileName, int empNum)
 
         }
 
+    }
+    file.close();
+    return output;
+}
+
+vector <vector<string> > Employee::readMultipleData(string fileName, int rowPos, int num) {
+    string line, word;
+    vector <string> row;
+    vector <vector<string> > output;
+    int tempNum;
+//    bool empFound = false;
+
+    fstream file;
+    file.open(fileName, ios::in);
+
+    while (!file.eof()) {
+        while (getline(file, line)) {
+            row.clear();
+            stringstream s(line);
+
+            while (getline(s, word, ',')) {
+                row.push_back(word);
+            }
+            tempNum = stoi(row[rowPos]);
+            if (num == tempNum) {
+                output.push_back(row);
+            }
+        }
     }
     file.close();
     return output;

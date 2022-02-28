@@ -82,7 +82,7 @@ void ITS::removeUser()
     cout << "Enter employee number: " << endl;
     cin >> userEmployeeNumber;
 
-    deleteData(emp_details, "Data/temp.csv", userEmployeeNumber);
+    deleteData(emp_details, "Data/temp.csv", userEmployeeNumber,1);
 
     remove("Data/employee_details.csv");
     rename("Data/temp.csv", "Data/employee_details.csv");

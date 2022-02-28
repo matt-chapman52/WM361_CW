@@ -36,7 +36,7 @@ On Windows
 * g++ -c Login.cpp -o Login.o
 * g++ -c main.cpp -o main.o
 * g++ main.o ITS.o HumanResources.o Employee.o Manager.o Login.o  -o main.exe
-* ./main.exe
+* main.exe
 
 
 ## Org Chart

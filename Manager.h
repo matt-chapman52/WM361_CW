@@ -18,7 +18,7 @@ using namespace std;
 class Manager : public Employee
 {
 public:
-    Manager();
+    Manager(int num);
     void reviewLeave(vector<vector<string> > all_leave);
     void viewUpcomingLeave(vector<vector<string> > all_leave);
 
@@ -26,4 +26,4 @@ public:
 
 };
 
-#endif //WM361_CW_MANAGER_H
+#endif

@@ -62,7 +62,7 @@ int main()
             }
             else if (!strcasecmp(role.c_str(), "Employee Manager"))
             {
-                Manager manager;
+                Manager manager(emp.employeeNumber);
                 break;
             }
             else if (!strcasecmp(role.c_str(), "IT Manager"))
@@ -79,7 +79,7 @@ int main()
                 }
                 else if (option == 2)
                 {
-                    Manager manager;
+                    Manager manager(emp.employeeNumber);
                 }
                 else
                 {
@@ -100,7 +100,7 @@ int main()
                 }
                 else if (option == 2)
                 {
-                    Manager manager;
+                    Manager manager(emp.employeeNumber);
                 }
                 else
                 {

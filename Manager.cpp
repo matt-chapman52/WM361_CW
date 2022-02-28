@@ -5,13 +5,13 @@
 #include "Manager.h"
 // Constructor
 
-Manager::Manager()
+Manager::Manager(int num)
 {
+    employeeNumber = num;
     int option;
     string emp_details = "Data/employee_details.csv";
     string emp_leave = "Data/employee_leave.csv";
     vector<vector<string> > all_leave;
-    employeeNumber = 1;
 
     all_leave = readMultipleData(emp_leave, 1, employeeNumber);
 

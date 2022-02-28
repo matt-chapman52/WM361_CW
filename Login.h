@@ -22,7 +22,7 @@ class Login : public Employee
 private:
     bool VerifyEmpNum(int loginEmpNum, string dataFile);
     bool ReVerifyEmpNum(string dataFile);
-    bool VerifyPassword(int loginEmpNum);
+    bool VerifyPassword(int loginEmpNum, string dataFile);
     int loginEmployeeNum;
     int databaseEmployeeNum;
     int empNumRetry;

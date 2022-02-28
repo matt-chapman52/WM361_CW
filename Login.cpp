@@ -14,10 +14,6 @@ int Login::VerifyEmployee()
     cin >> loginEmployeeNum;
 
     string emp_details = "Data/employee_details.csv";
-    vector<string> row;
-
-    // Method for reading data from csv file
-    row = readData(emp_details, loginEmployeeNum);
 
     empNumRetry = 0;
 
@@ -25,7 +21,7 @@ int Login::VerifyEmployee()
 
     if (empNumValid == true)
     {
-        bool passwordValid = VerifyPassword(loginEmployeeNum);
+        bool passwordValid = VerifyPassword(loginEmployeeNum, emp_details);
         
         if (passwordValid == true)
         {
@@ -33,6 +29,7 @@ int Login::VerifyEmployee()
         }
         else
         {
+            cout << "/nLogin unsuccessful" << endl;
             return 0;
         }
     }
@@ -78,14 +75,23 @@ bool Login::VerifyEmpNum(int loginEmpNum, string dataFile)
     }
 }
 
-bool Login::VerifyPassword(int loginEmpNum)
+bool Login::VerifyPassword(int loginEmpNum, string dataFile)
 {
-    cout << "/nEnter your Password" << endl;
+    cout << "/nPlease enter your password. If you have forgotten your password, reset it by entering 1" << endl;
     cin >> loginPassword;
-    cout << "/nLogin successful!" << endl;
-    // return employee number if successful
-    // return 0 if unsuccessful
-    return true;
+    vector<string> userRow;
+    userRow = readData(dataFile, loginEmpNum);
+    databasePassword = userRow[4];
+    if (loginPassword == databasePassword)
+    {
+        cout << "/nLogin successful!" << endl;
+        return true;
+    }
+    else 
+    {
+        cout << "/nIncorrect Password" << endl;
+        return false;  
+    }  
 }
 
 bool Login::ReVerifyEmpNum(string dataFile)

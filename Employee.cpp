@@ -99,12 +99,12 @@ void Employee::changePersonalDetails()
     case 1:
         cout << "Enter new first name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 1, newData,1);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 0, 1, newData, 1);
         break;
     case 2:
         cout << "Enter new surname name: " << endl;
         cin >> newData;
-        editData(emp_details, "Data/temp.csv", employeeNumber, 2, newData,1);
+        editData(emp_details, "Data/temp.csv", employeeNumber, 0, 2, newData, 1);
         break;
     }
     remove("Data/employee_details.csv");
@@ -168,95 +168,97 @@ void Employee::requestLeave()
 
 void Employee::viewLeave()
 {
+    int addNum;
+    int showLeave = 1;
+    while (showLeave == 1) {
+        addNum = listLeave(employeeNumber);
 
-    int option;
+        int exitNum = addNum + 1;
 
-    cout << "\n----- Change and Request Leave -----"
-         << "\nWhat would you like to do?"
-         << endl;
-    cout << "(1) Request Leave" << endl;
-    cout << "(2) Change Leave" << endl;
-    cout << "(3) View Leave" << endl;
-    cout << "(4) Exit" << endl;
-    cin >> option;
+        int inputCheck = 1;
+        while (inputCheck == 1) {
+            cout << "Enter a REQUEST NUMBER to EDIT or DELETE request,";
+            cout << "\n(" << addNum << ") to REQUEST NEW LEAVE or,";
+            cout << "\n(" << exitNum << ") to EXIT to MAIN MENU" << endl;
+            string input;
+            cin >> input;
+            try {
+                int option = stoi(input);
+                inputCheck = 0;
 
-    switch (option)
-    {
-    case 1:
-        requestLeave();
-        break;
+                if (option < addNum && option > 0) {
+                    changeLeave(option);
+                } else if (option == addNum) {
+                    requestLeave();
+                } else if (option == exitNum) {
+                    showLeave = 0;
+                }
+            }
+            catch (...) {
+                cout << "\nInvalid Entry";
+            }
 
-    case 2:
-        // do the other ones - HENRY
-        break;
-
-    case 3:
-        listLeave(employeeNumber);
-        break;
-    case 4:
-        // Should just exit???
-        break;
+        }
     }
 
-    // Return to home page
 }
 
-void Employee::changeLeave(int desiredRow)
+void Employee::changeLeave(int index)
 {
-    string startDate, endDate;
-    cout << "\nEnter new start date in form DDMMYYYY: " << endl;
-    cin >> startDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 2, startDate,desiredRow);
-    remove("Data/employee_leave.csv");
-    rename("Data/temp.csv", "Data/employee_leave.csv");
-    cout << "\nEnter new end date in for DDMMYYYY: " << endl;
-    cin >> endDate;
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 3, endDate,desiredRow);
-    remove("Data/employee_leave.csv");
-    rename("Data/temp.csv", "Data/employee_leave.csv");
+    string newData;
+    string question[] = {"start","end"};
 
-    editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 4, "In Review",desiredRow);
-    remove("Data/employee_leave.csv");
-    rename("Data/temp.csv", "Data/employee_leave.csv");
+    cout << "Would you like to:" << endl;
+    cout << "(1) Edit request" << endl;
+    cout << "(2) Delete request" << endl;
+    int deleteOrEdit;
+    cin >> deleteOrEdit;
 
-    listLeave(employeeNumber);
+
+    switch (deleteOrEdit) {
+
+        case 1:
+            for (int i = 2; i < 5; i++) {
+                if (i == 4) {
+                    newData = "In Review";
+                } else {
+                    cout << "\nEnter new " << question[(i - 2)] << " date in form DDMMYYYY: " << endl;
+                    cin >> newData;
+                }
+
+                editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 0, i, newData, index);
+                remove("Data/employee_leave.csv");
+                rename("Data/temp.csv", "Data/employee_leave.csv");
+            }
+        break;
+        case 2:
+            deleteData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber,index);
+            remove("Data/employee_leave.csv");
+            rename("Data/temp.csv", "Data/employee_leave.csv");
+            break;
+    }
 }
 
-void Employee::listLeave(int empNum)
+int Employee::listLeave(int empNum)
 {
     vector<string> data;
     vector<vector<string> > all_emp_leave;
     all_emp_leave = readMultipleData("Data/employee_leave.csv", 0, employeeNumber);
     // data = readData("Data/employee_leave.csv", employeeNumber);
 
+    cout << "Your leave: " << endl;
+
     for (int i = 0; i < all_emp_leave.size(); i++)
     {
         cout << "(" << i + 1 << ") ";
         cout << " | Start: " << all_emp_leave[i][2];
-        cout << " | End: " << all_emp_leave[i][3] << endl;
+        cout << " | End: " << all_emp_leave[i][3];
+        cout << " | Status: " << all_emp_leave[i][4] << endl;
     }
 
-    // cout << "(1) Start:" << data[2] << " End:" << data[3] << endl;
-    int exitNum = all_emp_leave.size() + 1;
+    int addNum = all_emp_leave.size() + 1;
+    return addNum;
 
-    int inputCheck = 1;
-    while (inputCheck == 1)
-    {
-        cout << "\nEnter leave number to edit or " << exitNum << " to exit" << endl;
-        int option;
-        cin >> option;
-
-        if (option < exitNum && option > 0)
-        {
-            inputCheck = 0;
-            changeLeave(option);
-        }
-        else if (option == exitNum)
-        {
-            inputCheck = 0;
-            break;
-        }
-    }
 }
 vector<string> Employee::readData(string fileName, int empNum)
 {
@@ -330,13 +332,13 @@ vector<vector<string> > Employee::readMultipleData(string fileName, int rowPos, 
     return output;
 }
 
-vector<string> Employee::editData(string fileName, string tempName, int empNum, int field, string newData, int desiredRow)
+vector<string> Employee::editData(string fileName, string tempName, int empNum, int empCol,  int field, string newData, int index)
 {
     string line, word;
     vector<string> row, output;
     int tempEmpNum;
     bool empFound = false;
-    int empRowNum = 1;
+    int count = 1;
 
     // Open the current file as read-only
     fstream file;
@@ -354,14 +356,13 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
             row.clear();
             stringstream s(line);
 
-            while (getline(s, word, ','))
-            {
+            while (getline(s, word, ',')){
                 // Append to an empty vector
                 row.push_back(word);
-                tempEmpNum = stoi(row[0]);
             }
 
-            if (tempEmpNum != empNum || (tempEmpNum == empNum && empRowNum != desiredRow))
+            tempEmpNum = stoi(row[empCol]);
+            if (tempEmpNum != empNum)
             {
                 // Re-write the data
                 for (int i = 0; i < row.size(); i++)
@@ -370,11 +371,8 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
                 }
                 temp << "\n";
 
-                if (tempEmpNum == empNum){
-                    empRowNum++;
-                }
             }
-            else
+            else if ((tempEmpNum == empNum) && (count == index))
             {
                 empFound = true;
                 output = row;
@@ -387,7 +385,16 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
                     }
                 }
                 temp << "\n";
-                empRowNum++;
+                count += 1;
+            }
+            else
+            {
+                for (int i = 0; i < row.size(); i++)
+                {
+                    temp << row[i] << ",";
+                }
+                temp << "\n";
+                count += 1;
             }
         }
     }
@@ -423,11 +430,12 @@ void Employee::writeData(string fileName, vector<string> data)
     }
 }
 
-void Employee::deleteData(string fileName, string tempFile, int empNum)
+void Employee::deleteData(string fileName, string tempFile, int empNum, int index)
 {
     string line, word;
     vector<string> row;
     int tempEmpNum;
+    int count = 1;
 
     // Open the file with data as read-only
     fstream file;
@@ -459,8 +467,16 @@ void Employee::deleteData(string fileName, string tempFile, int empNum)
                 {
                     temp << row[i] << ",";
                 }
+                if (tempEmpNum == empNum && count != index)
+                {
+                    temp << row[i] << ",";
+                }
             }
             temp << "\n";
+            if (tempEmpNum == empNum)
+            {
+                count++;
+            }
         }
     }
     file.close();

@@ -22,13 +22,7 @@ public:
     void reviewLeave(vector<vector<string> > all_leave);
     void viewUpcomingLeave(vector<vector<string> > all_leave);
 
-private:
-    string userFirstName;
-    string userSurname;
-    string userEmail;
-    string userRole;
-    int userEmployeeNumber;
-    int userManager;
+//private:
 
 };
 

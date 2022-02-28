@@ -21,10 +21,11 @@ int Login::VerifyEmployee()
 
     if (empNumValid == true)
     {
-        bool passwordValid = VerifyPassword(loginEmployeeNum, emp_details);
+        bool passwordValid = VerifyPassword(loginEmployeeNum);
         
         if (passwordValid == true)
         {
+            cout << "/nLogin successful!" << endl;
             return loginEmployeeNum;
         }
         else
@@ -67,6 +68,7 @@ bool Login::VerifyEmpNum(int loginEmpNum, string dataFile)
         
     if (withinRange == true & loginEmpNum == employeeNumber)
     {
+        userData = row;
         return true;
     }
     else 
@@ -75,16 +77,25 @@ bool Login::VerifyEmpNum(int loginEmpNum, string dataFile)
     }
 }
 
-bool Login::VerifyPassword(int loginEmpNum, string dataFile)
+bool Login::VerifyPassword(int loginEmpNum)
 {
-    cout << "/nPlease enter your password. If you have forgotten your password, reset it by entering 1" << endl;
+    cout << "\nPlease enter your password. If you have forgotten your password, reset it by entering 1" << endl;
     cin >> loginPassword;
-    vector<string> userRow;
-    userRow = readData(dataFile, loginEmpNum);
-    databasePassword = userRow[4];
+    databasePassword = userData[4];
+    if (loginPassword == "1")
+    {
+        bool resetStatus = ResetPassword();
+        if (resetStatus == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     if (loginPassword == databasePassword)
     {
-        cout << "/nLogin successful!" << endl;
         return true;
     }
     else 
@@ -118,6 +129,26 @@ bool Login::ReVerifyEmpNum(string dataFile)
             return validateReEmpNum = VerifyEmpNum(reloginEmpNum, dataFile);
         }
     } 
+}
+
+bool Login::ResetPassword()
+{
+    string usrEmail = userData[3];
+    int uCode = rand() % 9000 + 1000;
+    int enteredUCode;
+    cout << "\nWe have sent a unique 4 digit code to " << usrEmail << endl;
+    cout << "\nEnter it below to reset your password" << endl;
+    cout <<"\nFor demonstration purposes enter the random 4 digit code: " << uCode << endl;
+    cin >> enteredUCode;
+
+    if (enteredUCode == uCode)
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
 }
 
 

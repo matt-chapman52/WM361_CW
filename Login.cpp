@@ -18,38 +18,26 @@ int Login::VerifyEmployee()
 
     // Method for reading data from csv file
     row = readData(emp_details, loginEmployeeNum);
-    
-    return loginEmployeeNum;
-    /*s
-    int rows = 0;
-    int choice;
-    string line;
-    ifstream file("Data/employee_details.csv");
 
-    while (getline(file, line))
-    {
-        rows++;
-    }
+    bool empNumValid = VerifyEmpNum(loginEmployeeNum);
 
-    if (loginEmployeeNum <= rows)
+    if (empNumValid == true)
     {
-        // possibly add "welcome (first and second name)"
-        VerifyPassword();
+        bool passwordValid = VerifyPassword(loginEmployeeNum);
+        
+        if (passwordValid == true)
+        {
+            return loginEmployeeNum
+        }
     }
     else
     {
-        // "This employee number does not exist, enter 1 to try again or 2 to register for the annual leave service with IT"
-        if (choice==1)
-        {
-            Login();
-        }
-        else
-        {
-            //"Please contact IT on -------- to register an account"
-        }
-        
+        return 0;
     }
-    */
+}
+
+bool Login::VerifyEmpNum()
+{
 
 }
 

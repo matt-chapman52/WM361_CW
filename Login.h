@@ -20,6 +20,7 @@ using namespace std;
 class Login : public Employee 
 {
 private:
+    bool VerifyEmpNum();
     bool VerifyPassword();
     int loginEmployeeNum;
     int databaseEmployeeNum;

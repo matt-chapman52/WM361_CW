@@ -22,13 +22,12 @@ To edit this project and run locally:
 ## Compile and Run
 Make sure your terminal is in the project directory
 
-On Mac 
+On Mac or Linux
 * type: make
 * Once compiled type: ./main 
 * The main file should be running in your terminal
 
 On Windows
-* Run the following commands in the project directory:
 * g++ -c Employee.cpp -o Employee.o 
 * g++ -c HumanResources.cpp -o HumanResources.o
 * g++ -c ITS.cpp -o ITS.o

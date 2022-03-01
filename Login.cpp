@@ -16,6 +16,7 @@ int Login::VerifyEmployee()
     string emp_details = "Data/employee_details.csv";
 
     empNumRetry = 0;
+    attemptsLeft = 5;
 
     bool empNumValid = VerifyEmpNum(loginEmployeeNum, emp_details);
 
@@ -25,12 +26,12 @@ int Login::VerifyEmployee()
         
         if (passwordValid == true)
         {
-            cout << "/nLogin successful!" << endl;
+            cout << "\nLogin successful!" << endl;
             return loginEmployeeNum;
         }
         else
         {
-            cout << "/nLogin unsuccessful" << endl;
+            cout << "\nLogin unsuccessful" << endl;
             return 0;
         }
     }
@@ -100,8 +101,18 @@ bool Login::VerifyPassword(int loginEmpNum)
     }
     else 
     {
-        cout << "/nIncorrect Password" << endl;
-        return false;  
+        if (attemptsLeft !=0)
+        {
+            cout << "\nIncorrect password, try again (you have " << attemptsLeft << " attempts left)"<< endl;
+            attemptsLeft--;
+            return VerifyPassword(loginEmpNum);
+        }
+        else
+        {
+            cout << "\nYou have entered an incorrect password too many times. Please restart the program" << endl;
+            return false;
+        }
+        
     }  
 }
 
@@ -134,8 +145,12 @@ bool Login::ReVerifyEmpNum(string dataFile)
 bool Login::ResetPassword()
 {
     string usrEmail = userData[3];
-    int uCode = rand() % 9000 + 1000;
+    srand( time(NULL) );
+    int uCode = rand() %1000+9000;
     int enteredUCode;
+    string newPassword;
+    string emp_details = "Data/employee_details.csv";
+
     cout << "\nWe have sent a unique 4 digit code to " << usrEmail << endl;
     cout << "\nEnter it below to reset your password" << endl;
     cout <<"\nFor demonstration purposes enter the random 4 digit code: " << uCode << endl;
@@ -143,10 +158,25 @@ bool Login::ResetPassword()
 
     if (enteredUCode == uCode)
     {
-        return true;
+        cout << "\nEnter your new password:" << endl;
+        cin >> newPassword;
+        if (newPassword != "1")
+        {
+            editData(emp_details, "Data/temp.csv", loginEmployeeNum, 4, newPassword, 1);
+            remove("Data/employee_details.csv");
+            rename("Data/temp.csv", "Data/employee_details.csv");
+            cout << "\nYour password has been reset" << endl;
+            return true;
+        }
+        else
+        {
+            cout << "\nChoose a new password other than 1" << endl;
+            return false;
+        }
     }
     else 
     {
+        cout << "\nCode does not match, password reset failed" << endl;
         return false;
     }
 }

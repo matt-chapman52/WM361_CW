@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
 
 #include "Employee.h"
 
@@ -27,6 +28,7 @@ private:
     int loginEmployeeNum;
     int databaseEmployeeNum;
     int empNumRetry;
+    int attemptsLeft;
     string loginPassword;
     string databasePassword;
     vector<string> userData;

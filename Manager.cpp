@@ -1,6 +1,8 @@
-//
-// Created by Scott Tomlins on 26/02/2022.
-//
+/**
+ * @file Manager.cpp
+ * @author u1839629
+ * @brief The manager class for the employee booking system
+ */
 
 #include "Manager.h"
 // Constructor
@@ -53,13 +55,25 @@ void Manager::reviewLeave(vector<vector<string> > all_leave){
         }
     }
 
-    cout << "Enter the number of the leave you want to approve, if not enter 0" << endl;
+    cout << "Enter the number of any leave you want to APPROVE, if not enter 0" << endl;
     cin >> leave_approve;
 //    leave_approve--;
 
     if (count(leave_review.begin(), leave_review.end(), leave_approve)) {
         editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 1, 4, "Approved", leave_approve);
-//        editData2("Data/employee_leave.csv", leave_approve, 4, "Approved");
+
+        remove("Data/employee_leave.csv");
+        rename("Data/temp.csv", "Data/employee_leave.csv");
+
+        cout << "Leave approved!";
+    }
+
+    cout << "Enter the number of any leave you want to DENY, if not enter 0" << endl;
+    cin >> leave_approve;
+//    leave_approve--;
+
+    if (count(leave_review.begin(), leave_review.end(), leave_approve)) {
+        editData("Data/employee_leave.csv", "Data/temp.csv", employeeNumber, 1, 4, "Denied", leave_approve);
 
         remove("Data/employee_leave.csv");
         rename("Data/temp.csv", "Data/employee_leave.csv");

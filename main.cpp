@@ -35,11 +35,9 @@ int main()
 
     int manager_status = emp.isManager(emp.employeeNumber);
 
-    if (manager_status == 1)
-    {
-        role += " Manager";
-    }
-    cout << role << endl;
+    if (manager_status == 1){role += " Manager";}
+
+    cout << "Your role is: " << role << endl;
 
     while (true)
     {

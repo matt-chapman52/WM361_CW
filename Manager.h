@@ -1,6 +1,8 @@
-//
-// Created by Scott Tomlins on 26/02/2022.
-//
+/**
+ * @file Manager.h
+ * @author u1839619
+ * @brief head file for manager class
+ */
 
 #ifndef MANAGER_H
 #define MANAGER_H

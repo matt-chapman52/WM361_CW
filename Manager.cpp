@@ -65,7 +65,7 @@ void Manager::reviewLeave(vector<vector<string> > all_leave){
         remove("Data/employee_leave.csv");
         rename("Data/temp.csv", "Data/employee_leave.csv");
 
-        cout << "Leave approved!";
+        cout << "Leave approved!" << endl;
     }
 
     cout << "Enter the number of any leave you want to DENY, if not enter 0" << endl;
@@ -78,7 +78,7 @@ void Manager::reviewLeave(vector<vector<string> > all_leave){
         remove("Data/employee_leave.csv");
         rename("Data/temp.csv", "Data/employee_leave.csv");
 
-        cout << "Leave approved!";
+        cout << "Leave denied!" << endl;
     }
 }
 

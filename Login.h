@@ -12,17 +12,27 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
+
+#include "Employee.h"
 
 using namespace std;
 
-class Login // Add child of employees
+class Login : public Employee 
 {
 private:
-    bool VerifyPassword();
+    bool VerifyEmpNum(int loginEmpNum, string dataFile);
+    bool ReVerifyEmpNum(string dataFile);
+    bool VerifyPassword(int loginEmpNum);
+    bool ResetPassword();
     int loginEmployeeNum;
     int databaseEmployeeNum;
+    int empNumRetry;
+    int attemptsLeft;
     string loginPassword;
     string databasePassword;
+    vector<string> userData;
+
 
 public:
     int VerifyEmployee();

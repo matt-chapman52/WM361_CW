@@ -24,6 +24,11 @@ int main()
     Employee emp;
 
     emp.employeeNumber = loginUser.VerifyEmployee();
+    
+    if (emp.employeeNumber == 0)
+    {
+        exit(0);
+    }
 
     details = emp.readData("Data/employee_details.csv", emp.employeeNumber);
     role = details[5];

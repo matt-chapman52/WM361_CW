@@ -162,7 +162,7 @@ bool Login::ResetPassword()
         cin >> newPassword;
         if (newPassword != "1")
         {
-            editData(emp_details, "Data/temp.csv", loginEmployeeNum, 4, newPassword, 1);
+            editData(emp_details, "Data/temp.csv", loginEmployeeNum, 0, 4, newPassword, 1);
             remove("Data/employee_details.csv");
             rename("Data/temp.csv", "Data/employee_details.csv");
             cout << "\nYour password has been reset" << endl;

@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 #include "Employee.h"
 

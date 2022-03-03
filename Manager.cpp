@@ -17,11 +17,12 @@ Manager::Manager(int num)
 
     all_leave = readMultipleData(emp_leave, 1, employeeNumber);
 
-    cout << "\n----- Manager Menu ----"
-         << "\nWhat would you like to do?" << endl;
-    cout << "(1) Review your employees leave" << endl;
-    cout << "(2) View your employees upcoming leave" << endl;
-    cout << "(3) Exit" << endl;
+    cout << "----- Manager Menu ----" << endl
+         << "What would you like to do?" << endl
+         << "(1) Review your employees leave" << endl
+         << "(2) View your employees upcoming leave" << endl
+         << "(3) Exit" << endl;
+
     cin >> option;
 
     switch (option)
@@ -47,10 +48,10 @@ void Manager::reviewLeave(vector<vector<string> > all_leave){
     for (int i = 0; i < all_leave.size(); i++){
         if (all_leave[i][4] == "In Review"){
             leave_review.push_back(i+1);
-            cout << "(" << i+1 << ") ";
-            cout << "Employee: " << all_leave[i][0];
-            cout << " | Start: " << all_leave[i][2];
-            cout << " | End: " << all_leave[i][3] << endl;
+            cout << "(" << i+1 << ") "
+                 << "Employee: " << all_leave[i][0]
+                 << " | Start: " << all_leave[i][2]
+                 << " | End: " << all_leave[i][3] << endl;
         }
     }
 
@@ -89,9 +90,9 @@ void Manager::viewUpcomingLeave(vector<vector<string> > all_leave)
     {
         if (all_leave[i][4] == "Approved")
         {
-            cout << "Employee: " << all_leave[i][0];
-            cout << " | Start: " << all_leave[i][2];
-            cout << " | End: " << all_leave[i][3] << endl;
+            cout << "Employee: " << all_leave[i][0]
+                 << " | Start: " << all_leave[i][2]
+                 << " | End: " << all_leave[i][3] << endl;
         }
     }
 

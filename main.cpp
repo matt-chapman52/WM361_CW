@@ -93,8 +93,8 @@ int main()
             {
                 int option;
                 cout << "\n----- More Options ----" << endl;
-                cout << "(1) HR Menu";
-                cout << "\n(2) Manager Menu";
+                cout << "(1) HR Menu" << endl;
+                cout << "(2) Manager Menu" << endl;
                 cin >> option;
 
                 if (option == 1)

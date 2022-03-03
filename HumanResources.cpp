@@ -11,10 +11,10 @@ HumanResources::HumanResources()
     int option;
 
     cout << "\n----- HR Menu ----"
-         << "\nWhat would you like to do?" << endl;
-    cout << "(1) Change an employee's manager" << endl;
-    cout << "(2) Change an employee's job role" << endl;
-    cout << "(3) Return" << endl;
+         << "\nWhat would you like to do?" << endl
+         << "(1) Change an employee's manager" << endl
+         << "(2) Change an employee's job role" << endl
+         << "(3) Return" << endl;
     cin >> option;
 
     switch (option)
@@ -36,8 +36,8 @@ void HumanResources::changeManager()
 {
     string emp_data = "Data/employee_details.csv";
 
-    cout << "\n----- Change Manager -----" << endl;
-    cout << "\nEnter the employee number you would like to change" << endl;
+    cout << "\n----- Change Manager -----" << endl
+         << "\nEnter the employee number you would like to change" << endl;
     cin >> empNum;
 
     cout << "\nEnter employee's new manager's employee number" << endl;
@@ -54,11 +54,11 @@ void HumanResources ::changeJobRole()
 
     string emp_data = "Data/employee_details.csv";
 
-    cout << "\n----- Change Job Role -----" << endl;
-    cout << "\nEnter the employee number you would like to change" << endl;
+    cout << "----- Change Job Role -----" << endl
+         << "Enter the employee number you would like to change" << endl;
     cin >> empNum;
 
-    cout << "\nEnter employee's new job role (Enigneer, Manager, ITS, HR): " << endl;
+    cout << "Enter employee's new job role (Enigneer, Manager, ITS, HR): " << endl;
     cin >> newRole;
 
     editData(emp_data, "Data/temp.csv", empNum, 0, 5, newRole, 1);

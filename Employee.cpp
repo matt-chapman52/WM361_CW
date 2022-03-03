@@ -5,9 +5,9 @@
  */
 #include "Employee.h"
 
-Employee::Employee()
-{
-}
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
+Employee::Employee(){}
 
 int Employee::showOptions()
 {
@@ -18,7 +18,7 @@ int Employee::showOptions()
          << endl;
     cout << "(1) Show my personal details" << endl;
     cout << "(2) Change my personal details" << endl;
-    cout << "(3) Leave Menu" << endl;
+    cout << "(3) Show leave menu" << endl;
     cout << "(4) Show more options" << endl;
     cout << "(5) Exit" << endl;
     cin >> option;
@@ -72,7 +72,7 @@ void Employee::getPersonalDetails()
     // Display the Data in the console
     cout << "\n----- Personal Details ------\n"
          << endl;
-    cout << "Employee Number: " << row[0] << endl;
+    cout << "Employee number: " << row[0] << endl;
     cout << "First Name: " << row[1] << endl;
     cout << "Surname: " << row[2] << endl;
     cout << "Email: " << row[3] << endl;
@@ -90,7 +90,7 @@ void Employee::changePersonalDetails()
     readData(emp_details, employeeNumber);
 
     cout << "\n What would you like to change?"
-         << "\n(1) First Name"
+         << "\n(1) First name"
          << "\n(2) Surname" << endl;
     cin >> decision;
 
@@ -102,7 +102,7 @@ void Employee::changePersonalDetails()
         editData(emp_details, "Data/temp.csv", employeeNumber, 0, 1, newData, 1);
         break;
     case 2:
-        cout << "Enter new surname name: " << endl;
+        cout << "Enter new surname: " << endl;
         cin >> newData;
         editData(emp_details, "Data/temp.csv", employeeNumber, 0, 2, newData, 1);
         break;
@@ -174,12 +174,11 @@ void Employee::viewLeave()
         addNum = listLeave(employeeNumber);
 
         int exitNum = addNum + 1;
-
         int inputCheck = 1;
         while (inputCheck == 1) {
-            cout << "Enter a REQUEST NUMBER to EDIT or DELETE request,";
-            cout << "\n(" << addNum << ") to REQUEST NEW LEAVE or,";
-            cout << "\n(" << exitNum << ") to EXIT to MAIN MENU" << endl;
+            cout << "Enter a REQUEST NUMBER to EDIT or DELETE request," << endl;
+            cout << "(" << addNum << ") to REQUEST NEW LEAVE or," << endl;
+            cout << "(" << exitNum << ") to EXIT to MAIN MENU" << endl;
             string input;
             cin >> input;
             try {
@@ -195,7 +194,7 @@ void Employee::viewLeave()
                 }
             }
             catch (...) {
-                cout << "\nInvalid Entry";
+                cout << "Invalid entry" << endl;
             }
 
         }
@@ -481,3 +480,4 @@ void Employee::deleteData(string fileName, string tempFile, int empNum, int inde
     file.close();
     temp.close();
 }
+#pragma clang diagnostic pop

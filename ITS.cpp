@@ -12,10 +12,10 @@ ITS::ITS()
     int option;
 
     cout << "\n----- IT Menu ----"
-         << "\nWhat would you like to do?" << endl;
-    cout << "(1) Add a new user" << endl;
-    cout << "(2) Delete a user" << endl;
-    cout << "(3) Exit" << endl;
+         << "\nWhat would you like to do?" << endl
+         << "(1) Add a new user" << endl
+         << "(2) Delete a user" << endl
+         << "(3) Exit" << endl;
     cin >> option;
 
     switch (option)
@@ -77,8 +77,8 @@ void ITS::addUser()
 void ITS::removeUser()
 {
     string emp_details = "Data/employee_details.csv";
-    cout << "----- Remove a user from the system -----" << endl;
-    cout << "Enter employee number: " << endl;
+    cout << "----- Remove a user from the system -----" << endl
+         << "Enter employee number: " << endl;
     cin >> userEmployeeNumber;
 
     deleteData(emp_details, "Data/temp.csv", userEmployeeNumber,1);

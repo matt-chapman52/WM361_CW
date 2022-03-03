@@ -8,9 +8,9 @@
 
 int Login::verifyEmployee()
 {
-    cout << "\n----- Welcome -----"
-         << "\nLogin to Continue"
-         << "\nPlease enter your employee number" << endl;
+    cout << "\n----- Welcome -----" << endl
+         << "Login to Continue" << endl
+         << "Please enter your employee number" << endl;
     cin >> loginEmployeeNum;
 
     string emp_details = "Data/employee_details.csv";
@@ -120,7 +120,7 @@ bool Login::reVerifyEmpNum(string dataFile)
 {
     int reloginEmpNum;
     bool validateReEmpNum;
-    cout << "\nWe couldnt find your details. Enter your employee number to try again or enter 0 to register your account" << endl;
+    cout << "\nWe couldn't find your details. Enter your employee number to try again or enter 0 to register your account" << endl;
     cin >> reloginEmpNum;
     if (reloginEmpNum == 0)
     {

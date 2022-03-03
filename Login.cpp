@@ -27,6 +27,7 @@ int Login::verifyEmployee()
         if (passwordValid == true)
         {
             cout << "\nLogin successful!" << endl;
+            cout << "\nWelcome " << userData[1] << endl;
             return loginEmployeeNum;
         }
         else

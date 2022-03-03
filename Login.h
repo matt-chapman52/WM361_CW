@@ -32,8 +32,6 @@ private:
     string loginPassword;
     string databasePassword;
     vector<string> userData;
-
-
 public:
     int verifyEmployee();
 };

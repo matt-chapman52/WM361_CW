@@ -1,7 +1,7 @@
 /**
  * @file HumanResources.h
  * @author 1943001
- * @brief
+ * @brief HR header file containing declarations realting to HumanResources.cpp
  */
 
 #ifndef HumanResources_H

@@ -1,7 +1,7 @@
 /**
  * @file Employee.cpp
- * @author your name (you@domain.com)
- * @brief
+ * @author 1943001
+ * @brief Employee class. All public methods are inherited by HR, IT and Managers.
  */
 #include "Employee.h"
 

@@ -1,7 +1,8 @@
 /**
  * @file ITS.cpp
  * @author 1943001
- * @brief
+ * @brief IT class for the leave booking system. Methods can only be
+ *        accessed if verified to be an IT employee
  */
 
 #include "ITS.h"

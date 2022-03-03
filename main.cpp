@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @author your name (you@domain.com)
+ * @author 1943001, 1942995, 1839590, 1839632, 1839629
  * @brief The main file for an employee leave booking system
  */
 

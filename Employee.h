@@ -1,7 +1,7 @@
 /**
  * @file Employee.h
- * @author your name (you@domain.com)
- * @brief
+ * @author 1943001
+ * @brief Employee header file containing declarations relating to Employee.cpp
  *
  */
 

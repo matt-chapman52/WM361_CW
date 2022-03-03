@@ -1,7 +1,8 @@
 /**
  * @file HumanResources.cpp
  * @author 1943001
- * @brief
+ * @brief HR class for the leave booking system. Methods can only be
+ *        accessed if verified to be an HR employee
  */
 
 #include "HumanResources.h"

@@ -1,7 +1,7 @@
 /**
  * @file ITS.h
- * @author your name (you@domain.com)
- * @brief
+ * @author 1943001
+ * @brief IT header file containing declarations realting to ITS.cpp
  */
 
 #ifndef ITS_H

@@ -200,7 +200,6 @@ void Employee::viewLeave()
 
         }
     }
-
 }
 
 void Employee::changeLeave(int index)

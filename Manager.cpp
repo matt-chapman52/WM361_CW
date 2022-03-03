@@ -33,7 +33,6 @@ Manager::Manager(int num)
         viewUpcomingLeave(all_leave);
         break;
     case 3:
-        //            exit(0);
         break;
     default:
         cout << "Enter a value between 1 and 3" << endl;

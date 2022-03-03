@@ -23,7 +23,7 @@ int main()
     Login loginUser;
     Employee emp;
 
-    emp.employeeNumber = loginUser.VerifyEmployee();
+    emp.employeeNumber = loginUser.verifyEmployee();
     
     if (emp.employeeNumber == 0)
     {

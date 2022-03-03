@@ -21,10 +21,10 @@ using namespace std;
 class Login : public Employee 
 {
 private:
-    bool VerifyEmpNum(int loginEmpNum, string dataFile);
-    bool ReVerifyEmpNum(string dataFile);
-    bool VerifyPassword(int loginEmpNum);
-    bool ResetPassword();
+    bool verifyEmpNum(int loginEmpNum, string dataFile);
+    bool reVerifyEmpNum(string dataFile);
+    bool verifyPassword(int loginEmpNum);
+    bool resetPassword();
     int loginEmployeeNum;
     int databaseEmployeeNum;
     int empNumRetry;
@@ -35,7 +35,7 @@ private:
 
 
 public:
-    int VerifyEmployee();
+    int verifyEmployee();
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 #include "Login.h"
 
-int Login::VerifyEmployee()
+int Login::verifyEmployee()
 {
     cout << "\n----- Welcome -----"
          << "\nLogin to Continue"
@@ -18,11 +18,11 @@ int Login::VerifyEmployee()
     empNumRetry = 0;
     attemptsLeft = 5;
 
-    bool empNumValid = VerifyEmpNum(loginEmployeeNum, emp_details);
+    bool empNumValid = verifyEmpNum(loginEmployeeNum, emp_details);
 
     if (empNumValid == true)
     {
-        bool passwordValid = VerifyPassword(loginEmployeeNum);
+        bool passwordValid = verifyPassword(loginEmployeeNum);
         
         if (passwordValid == true)
         {
@@ -41,7 +41,7 @@ int Login::VerifyEmployee()
     }
 }
 
-bool Login::VerifyEmpNum(int loginEmpNum, string dataFile)
+bool Login::verifyEmpNum(int loginEmpNum, string dataFile)
 {
     int totalRows=0;
     ifstream file(dataFile);
@@ -74,18 +74,18 @@ bool Login::VerifyEmpNum(int loginEmpNum, string dataFile)
     }
     else 
     {
-        return validReEmpNum = ReVerifyEmpNum(dataFile);
+        return validReEmpNum = reVerifyEmpNum(dataFile);
     }
 }
 
-bool Login::VerifyPassword(int loginEmpNum)
+bool Login::verifyPassword(int loginEmpNum)
 {
     cout << "\nPlease enter your password. If you have forgotten your password, reset it by entering 1" << endl;
     cin >> loginPassword;
     databasePassword = userData[4];
     if (loginPassword == "1")
     {
-        bool resetStatus = ResetPassword();
+        bool resetStatus = resetPassword();
         if (resetStatus == true)
         {
             return true;
@@ -105,7 +105,7 @@ bool Login::VerifyPassword(int loginEmpNum)
         {
             cout << "\nIncorrect password, try again (you have " << attemptsLeft << " attempts left)"<< endl;
             attemptsLeft--;
-            return VerifyPassword(loginEmpNum);
+            return verifyPassword(loginEmpNum);
         }
         else
         {
@@ -116,7 +116,7 @@ bool Login::VerifyPassword(int loginEmpNum)
     }  
 }
 
-bool Login::ReVerifyEmpNum(string dataFile)
+bool Login::reVerifyEmpNum(string dataFile)
 {
     int reloginEmpNum;
     bool validateReEmpNum;
@@ -137,12 +137,12 @@ bool Login::ReVerifyEmpNum(string dataFile)
         }
         else
         {
-            return validateReEmpNum = VerifyEmpNum(reloginEmpNum, dataFile);
+            return validateReEmpNum = verifyEmpNum(reloginEmpNum, dataFile);
         }
     } 
 }
 
-bool Login::ResetPassword()
+bool Login::resetPassword()
 {
     string usrEmail = userData[3];
     srand( time(NULL) );

@@ -29,6 +29,7 @@ private:
 
 public:
     Employee();
+    int employeeNumber;
     int showOptions();
     void getPersonalDetails();
     void changePersonalDetails();
@@ -37,7 +38,6 @@ public:
     void changeLeave(int index);
     int listLeave(int empNum);
     int isManager(int empNum);
-    int employeeNumber;
     vector<string> readData(string fileName, int empNum);
     vector<vector<string> > readMultipleData(string fileName, int rowPos, int num);
     vector<string> editData(string fileName, string tempName, int empNum, int empCol, int field, string newData, int index);

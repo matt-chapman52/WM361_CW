@@ -37,6 +37,13 @@ On Windows
 * g++ main.o ITS.o HumanResources.o Employee.o Manager.o Login.o  -o main.exe
 * main.exe
 
+## Testing
+To get pass the login portal:
+* Enter '1' for employee number
+* Enter 'pass' for password
+* OR follow the reset password process to gain entry
 
 ## Org Chart
 ![img.png](misc/org_chart.png)
+
+

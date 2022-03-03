@@ -13,14 +13,15 @@ int Employee::showOptions()
 {
     int option;
 
-    cout << "\n----- Welcome -----"
-            "\nWhat would you like to do?"
+    cout << "\n----- Main Menu -----"
+         << "\n\nEmployee Number: " << employeeNumber
+         << "\n\nWhat would you like to do ?"
          << endl;
     cout << "(1) Show my personal details" << endl;
     cout << "(2) Change my personal details" << endl;
     cout << "(3) Show leave menu" << endl;
     cout << "(4) Show more options" << endl;
-    cout << "(5) Exit" << endl;
+    cout << "(5) Exit Programme" << endl;
     cin >> option;
 
     return option;
@@ -125,7 +126,7 @@ void Employee::requestLeave()
         cout << "\n----- Request Leave ------" << endl;
         cout << "\nEnter start date in form DDMMYYYY: " << endl;
         cin >> startDate;
-        cout << "Enter end date in for DDMMYYYY: " << endl;
+        cout << "Enter end date in form DDMMYYYY: " << endl;
         cin >> endDate;
 
         row.clear();
@@ -400,6 +401,10 @@ vector<string> Employee::editData(string fileName, string tempName, int empNum, 
     {
         output.push_back("Error in retrieving data");
         cout << "Unable to retrieve data" << endl;
+    }
+    else
+    {
+        cout << "Success in writing data" << endl;
     }
 
     file.close();

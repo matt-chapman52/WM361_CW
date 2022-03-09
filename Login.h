@@ -1,7 +1,7 @@
 /**
  * @file Login.h
- * @author Jack Pang (u1942995@live.warwick.ac.uk)
- * @brief
+ * @author 1942995
+ * @brief Login header file containing declarations relating to Login.cpp
  */
 
 #ifndef Login_H
@@ -26,14 +26,11 @@ private:
     bool verifyPassword(int loginEmpNum);
     bool resetPassword();
     int loginEmployeeNum;
-    int databaseEmployeeNum;
     int empNumRetry;
     int attemptsLeft;
     string loginPassword;
     string databasePassword;
     vector<string> userData;
-
-
 public:
     int verifyEmployee();
 };
